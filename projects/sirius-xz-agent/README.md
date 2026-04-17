@@ -1,6 +1,20 @@
 # sirius-xz-agent
 
-Spring AI / Spring AI Alibaba / RAG / Agent 方向的样板项目。
+> Spring AI / Spring AI Alibaba / RAG / Agent scaffold
+
+![Java](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5-6DB33F?style=flat-square&logo=spring-boot&logoColor=white)
+![AI](https://img.shields.io/badge/AI-RAG%20%7C%20Agent-111827?style=flat-square)
+
+Spring AI / Spring AI Alibaba / RAG / Agent 方向的样板项目，用来沉淀 AI 应用的工程边界与接入方式。
+
+## 快速说明
+
+| 项目 | 内容 |
+| --- | --- |
+| 目标 | 建立 AI 应用的工程边界 |
+| 场景 | 对话、检索增强、工具调用、Agent 编排 |
+| 现状 | Spring Boot Web 骨架 + 示例接口 |
 
 ## 目标
 
@@ -14,11 +28,12 @@ Spring AI / Spring AI Alibaba / RAG / Agent 方向的样板项目。
 - `/api/agent/summary` 示例接口
 - 标准化的目录与包名
 
-## 下一阶段
+## 路线图
 
 - 接入 Spring AI 对话能力
 - 加入向量检索与知识库
 - 增加工具调用和 Agent 编排
+- 补齐测试与配置样例
 
 ## 启动
 
@@ -32,3 +47,8 @@ mvn spring-boot:run
 curl "http://localhost:8081/api/agent/summary?name=Sirius"
 ```
 
+## 目录约定
+
+- `src/main/java`：应用代码
+- `src/main/resources`：配置文件
+- `README.md`：项目说明与后续演进方向

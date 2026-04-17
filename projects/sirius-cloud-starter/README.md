@@ -1,6 +1,20 @@
 # sirius-cloud-starter
 
-Spring Cloud / Spring Cloud Alibaba 微服务脚手架。
+> Spring Cloud / Spring Cloud Alibaba microservice scaffold
+
+![Java](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5-6DB33F?style=flat-square&logo=spring-boot&logoColor=white)
+![Cloud](https://img.shields.io/badge/Cloud-Spring%20Cloud%20Alibaba-00A1A7?style=flat-square)
+
+Spring Cloud / Spring Cloud Alibaba 微服务脚手架，用来沉淀通用的服务起步结构和基础治理能力。
+
+## 快速说明
+
+| 项目 | 内容 |
+| --- | --- |
+| 目标 | 提供可复用的微服务起步骨架 |
+| 场景 | 注册发现、配置治理、Feign 调用、网关接入 |
+| 现状 | Spring Boot Web 服务 + 健康检查接口 |
 
 ## 目标
 
@@ -14,12 +28,13 @@ Spring Cloud / Spring Cloud Alibaba 微服务脚手架。
 - `/api/health` 示例接口
 - 关闭状态下的 Nacos discovery 配置
 
-## 下一阶段
+## 路线图
 
 - 接入配置中心
 - 接入服务注册与发现
 - 增加 OpenFeign 调用示例
 - 扩展网关与统一鉴权
+- 补齐接口监控与日志规范
 
 ## 启动
 
@@ -33,3 +48,8 @@ mvn spring-boot:run
 curl http://localhost:8082/api/health
 ```
 
+## 目录约定
+
+- `src/main/java`：应用与示例接口
+- `src/main/resources`：基础配置
+- `README.md`：微服务脚手架说明与演进计划
