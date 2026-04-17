@@ -2,6 +2,16 @@ spring:
   application:
     name: sirius-xz-agent
 
+sirius:
+  ai:
+    deepseek:
+      enabled: ${SIRIUS_AI_DEEPSEEK_ENABLED:false}
+      api-key: ${DEEPSEEK_API_KEY:}
+      base-url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com}
+      model: ${DEEPSEEK_MODEL:deepseek-chat}
+      temperature: ${DEEPSEEK_TEMPERATURE:0.2}
+      max-tokens: ${DEEPSEEK_MAX_TOKENS:1024}
+
 server:
   port: 8081
 
@@ -10,4 +20,3 @@ management:
     web:
       exposure:
         include: health,info
-
