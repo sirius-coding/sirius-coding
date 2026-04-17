@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: sirius-cloud-starter
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+
+server:
+  port: 8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+

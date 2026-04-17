@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: sirius-web-toolkit
+
+server:
+  port: 8083
+
