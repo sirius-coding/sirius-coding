@@ -2,17 +2,31 @@
 
 > Java / Spring / Spring Cloud / Spring Cloud Alibaba / Spring AI / Spring AI Alibaba / RAG / Vibe Coding
 
-你好，我是 `sirius-coding`。
-我主要做 Java 后端、微服务架构和 AI 应用落地，关注能真正进入业务场景的工程化实践。
+<p align="left">
+  <img src="https://img.shields.io/badge/Java-21-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21" />
+  <img src="https://img.shields.io/badge/Spring-6-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring" />
+  <img src="https://img.shields.io/badge/Spring%20Cloud-Alibaba-00A1A7?style=for-the-badge" alt="Spring Cloud Alibaba" />
+  <img src="https://img.shields.io/badge/AI%20Engineering-RAG%20%7C%20Agent-111827?style=for-the-badge" alt="AI Engineering" />
+</p>
+
+我是 `sirius-coding`，一个专注于 Java 后端、微服务架构和 AI 应用落地的技术实践账号。
+
+## 主页速览
+
+| 重点 | 内容 |
+| --- | --- |
+| 经验 | `10` 年 Java 相关开发经验 |
+| 定位 | Java 高级开发工程师 |
+| 主线 | Spring 生态、Spring Cloud Alibaba、Spring AI、RAG、Agent |
+| 目标 | 把复杂能力沉淀成可复用的组件、脚手架和项目模板 |
 
 ## 我是谁
 
-- `10` 年 Java 相关开发经验
-- Java 高级开发工程师
 - 长期专注后端架构、微服务治理、AI 应用和企业级系统落地
-- 喜欢把复杂能力沉淀成可复用的组件、脚手架和模板
+- 关注真正能进入业务场景的工程化实践，而不是只停留在概念验证
+- 喜欢把常见能力做成可复用的基础设施，减少重复造轮子
 
-## 核心方向
+## 核心能力
 
 ### 后端主线
 
@@ -49,6 +63,25 @@
 - 模板化工程
 - 可维护性设计
 
+## 代表项目
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <h3><a href="https://github.com/sirius-coding/sirius-xz-agent">sirius-xz-agent</a></h3>
+      <p>Spring AI / Spring AI Alibaba / RAG / Agent 样板，用来沉淀 AI 应用的工程边界、接口设计和知识库接入方式。</p>
+    </td>
+    <td width="33%" valign="top">
+      <h3><a href="https://github.com/sirius-coding/sirius-cloud-starter">sirius-cloud-starter</a></h3>
+      <p>Spring Cloud Alibaba 微服务起步骨架，面向注册发现、配置治理、Feign 调用、网关接入等场景。</p>
+    </td>
+    <td width="33%" valign="top">
+      <h3><a href="https://github.com/sirius-coding/sirius-web-toolkit">sirius-web-toolkit</a></h3>
+      <p>Web 微服务公共工具与约定，沉淀统一返回、异常处理和可复用基础能力。</p>
+    </td>
+  </tr>
+</table>
+
 ## 我做过什么
 
 - 搭建过企业级 Spring Cloud Alibaba 微服务体系
@@ -57,25 +90,9 @@
 - 做过训练管理、忠诚度测评、监狱智能监控等多模态系统
 - 参与过大型企业流程系统与 OA / HR 系统的微服务化和架构升级
 
-## 代表项目
+## 技术标签
 
-### AI 与 RAG
-
-- [`sirius-xz-agent`](https://github.com/sirius-coding/sirius-xz-agent)
-  - Spring AI / Spring AI Alibaba / RAG / Agent 样板
-  - 用来沉淀 AI 应用的工程边界、接口设计和知识库接入方式
-
-### 微服务脚手架
-
-- [`sirius-cloud-starter`](https://github.com/sirius-coding/sirius-cloud-starter)
-  - Spring Cloud Alibaba 微服务起步骨架
-  - 面向注册发现、配置治理、Feign 调用、网关接入等场景
-
-### 公共组件
-
-- [`sirius-web-toolkit`](https://github.com/sirius-coding/sirius-web-toolkit)
-  - Web 微服务公共工具与约定
-  - 统一返回、异常处理、通用能力沉淀
+`Java` `Spring Boot` `Spring Cloud` `Spring Cloud Alibaba` `Spring AI` `Spring AI Alibaba` `RAG` `Agent` `Nacos` `Redis` `RabbitMQ` `Kafka` `MySQL` `Docker` `K8s` `Claude Code` `Codex`
 
 ## 经验标签
 
@@ -91,6 +108,13 @@
 2. 补齐 `sirius-cloud-starter` 的微服务基础能力
 3. 继续沉淀 `sirius-web-toolkit` 的公共组件
 4. 用更少的重复劳动完成更多可复用工程能力
+
+## 进度
+
+<p>
+  <img src="https://github-readme-stats.vercel.app/api?username=sirius-coding&show_icons=true&hide_title=true&hide_border=true&count_private=true&theme=transparent" alt="GitHub Stats" height="150" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=sirius-coding&layout=compact&hide_border=true&theme=transparent" alt="Top Languages" height="150" />
+</p>
 
 ## 联系方式
 
