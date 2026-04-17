@@ -127,6 +127,10 @@
       <p>Spring AI Alibaba / DeepSeek / pgvector / RAG / Agent 第一版样板，支持结构化问答、知识库管理和 PostgreSQL 向量检索接入。</p>
     </td>
     <td width="33%" valign="top">
+      <h3><a href="./projects/sirius-xz-agent-ui">sirius-xz-agent-ui</a></h3>
+      <p>面向 sirius-xz-agent 的前端控制台，覆盖 Agent 概览、问答、知识库编辑和接口调试。</p>
+    </td>
+    <td width="33%" valign="top">
       <h3><a href="https://github.com/sirius-coding/sirius-cloud-starter">sirius-cloud-starter</a></h3>
       <p>Spring Cloud Alibaba 微服务第一版起步骨架，面向注册发现、配置治理、Feign 调用、网关接入等场景。</p>
     </td>
