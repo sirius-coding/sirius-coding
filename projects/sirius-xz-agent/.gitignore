@@ -3,4 +3,5 @@ target/
 .idea/
 .vscode/
 *.iml
-
+src/main/resources/application-local.yml
+.env.local

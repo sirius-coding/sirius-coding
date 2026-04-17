@@ -18,7 +18,7 @@ JDK_LIST="$(
 echo "${JDK_LIST}"
 echo
 
-if echo "${JDK_LIST}" | grep -Eq '^[[:space:]]*21\.'; then
+if echo "${JDK_LIST}" | grep -Eq '^[[:space:]]*21\.' || [ -x "/usr/local/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home/bin/java" ]; then
   echo "[info] JDK 21 detected."
 else
   echo "[warn] JDK 21 not detected. Current projects target Java 21."
