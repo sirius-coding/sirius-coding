@@ -141,6 +141,13 @@
   </tr>
 </table>
 
+## 运维与发布资产
+
+- [Workspace Opening Model](./docs/ops/workspace-opening-model.md)
+- [Environment Registry](./docs/ops/environment-registry.yaml)
+- [Cloud Deploy Checklist](./docs/sirius-xz-agent-cloud-deploy-checklist.md)
+- [Reusable Delivery Skill](./skills/workspace-multi-env-delivery/SKILL.md)
+
 ## 我做过什么
 
 - 搭建过企业级 Spring Cloud Alibaba 微服务体系

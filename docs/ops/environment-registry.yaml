@@ -1,0 +1,58 @@
+version: 1
+last_updated: "2026-04-18"
+owner: "sirius-coding"
+
+environments:
+  - id: "cloud-integration"
+    purpose: "integration-and-smoke"
+    ssh:
+      alias: "<private-ssh-alias>"
+      host: "<private-host-or-ip>"
+      user: "<private-ssh-user>"
+    paths:
+      workspace_root: "<remote-workspace-root>"
+      backend_dir: "<remote-backend-dir>"
+      frontend_dir: "<remote-frontend-dir>"
+    services:
+      - name: "sirius-xz-agent-backend"
+        kind: "backend"
+        public_port: 26000
+        health_path: "/actuator/health"
+      - name: "sirius-xz-agent-ui"
+        kind: "frontend"
+        public_port: 26100
+      - name: "sirius-xz-agent-pgvector"
+        kind: "database"
+        public_port: 5432
+        internal_db: "sirius_xz_agent"
+    notes:
+      - "release order: pgvector -> backend -> frontend"
+      - "frontend proxies /api and /actuator to backend service name"
+      - "health endpoint expected: http://<host>:26100/actuator/health"
+
+  - id: "template-new-environment"
+    purpose: "fill-when-adding-new-server"
+    ssh:
+      alias: "<ssh-alias>"
+      host: "<ip-or-domain>"
+      user: "<user>"
+    paths:
+      workspace_root: "<remote-workspace-root>"
+      backend_dir: "<remote-backend-dir>"
+      frontend_dir: "<remote-frontend-dir>"
+    services:
+      - name: "<backend-container>"
+        kind: "backend"
+        public_port: "<backend-port>"
+        health_path: "/actuator/health"
+      - name: "<frontend-container>"
+        kind: "frontend"
+        public_port: "<frontend-port>"
+      - name: "<database-container>"
+        kind: "database"
+        public_port: "<db-port>"
+        internal_db: "<db-name>"
+    notes:
+      - "record release order"
+      - "record proxy strategy"
+      - "record smoke checks"
