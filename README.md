@@ -124,7 +124,7 @@
   <tr>
     <td width="33%" valign="top">
       <h3><a href="https://github.com/sirius-coding/sirius-xz-agent">sirius-xz-agent</a></h3>
-      <p>Spring AI Alibaba / DeepSeek / RAG / Agent 第一版样板，支持结构化问答、知识库管理和后续向量检索接入。</p>
+      <p>Spring AI Alibaba / DeepSeek / pgvector / RAG / Agent 第一版样板，支持结构化问答、知识库管理和 PostgreSQL 向量检索接入。</p>
     </td>
     <td width="33%" valign="top">
       <h3><a href="https://github.com/sirius-coding/sirius-cloud-starter">sirius-cloud-starter</a></h3>

@@ -11,6 +11,8 @@ sirius:
       model: ${DEEPSEEK_MODEL:deepseek-chat}
       temperature: ${DEEPSEEK_TEMPERATURE:0.2}
       max-tokens: ${DEEPSEEK_MAX_TOKENS:1024}
+  vectorstore:
+    enabled: ${SIRIUS_VECTORSTORE_ENABLED:false}
 
 server:
   port: 8081
