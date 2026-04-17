@@ -5,10 +5,13 @@ services:
       dockerfile: Dockerfile.cloud
     container_name: sirius-xz-agent-backend
     restart: unless-stopped
-    network_mode: host
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "26000:26000"
     environment:
       SERVER_PORT: 26000
-      SPRING_DATASOURCE_URL: jdbc:postgresql://127.0.0.1:5432/sirius_xz_agent
+      SPRING_DATASOURCE_URL: jdbc:postgresql://sirius-xz-agent-pgvector:5432/sirius_xz_agent
       SPRING_DATASOURCE_USERNAME: sirius
       SPRING_DATASOURCE_PASSWORD: sirius
       SPRING_DATASOURCE_SSLMODE: disable
