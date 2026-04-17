@@ -124,15 +124,15 @@
   <tr>
     <td width="33%" valign="top">
       <h3><a href="https://github.com/sirius-coding/sirius-xz-agent">sirius-xz-agent</a></h3>
-      <p>Spring AI / Spring AI Alibaba / RAG / Agent 样板，用来沉淀 AI 应用的工程边界、接口设计和知识库接入方式。</p>
+      <p>Spring AI / Spring AI Alibaba / RAG / Agent 第一版样板，用来沉淀 AI 应用的工程边界、接口设计和知识库接入方式。</p>
     </td>
     <td width="33%" valign="top">
       <h3><a href="https://github.com/sirius-coding/sirius-cloud-starter">sirius-cloud-starter</a></h3>
-      <p>Spring Cloud Alibaba 微服务起步骨架，面向注册发现、配置治理、Feign 调用、网关接入等场景。</p>
+      <p>Spring Cloud Alibaba 微服务第一版起步骨架，面向注册发现、配置治理、Feign 调用、网关接入等场景。</p>
     </td>
     <td width="33%" valign="top">
       <h3><a href="https://github.com/sirius-coding/sirius-web-toolkit">sirius-web-toolkit</a></h3>
-      <p>Web 微服务公共工具与约定，沉淀统一返回、异常处理和可复用基础能力。</p>
+      <p>Web 微服务公共工具第一版，沉淀统一返回、异常处理、请求上下文和可复用基础能力。</p>
     </td>
   </tr>
 </table>
