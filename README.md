@@ -2,6 +2,10 @@
 
 > Java / Spring / Spring Cloud / Spring Cloud Alibaba / Spring AI / Spring AI Alibaba / RAG / Vibe Coding
 
+<p align="center">
+  <img src="assets/hero.svg" alt="Sirius Coding banner" />
+</p>
+
 <p align="left">
   <img src="https://img.shields.io/badge/Java-21-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21" />
   <img src="https://img.shields.io/badge/Spring-6-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring" />
@@ -9,7 +13,18 @@
   <img src="https://img.shields.io/badge/AI%20Engineering-RAG%20%7C%20Agent-111827?style=for-the-badge" alt="AI Engineering" />
 </p>
 
+<p align="center">
+  <a href="#主页速览">主页速览</a> ·
+  <a href="#核心能力">核心能力</a> ·
+  <a href="#代表项目">代表项目</a> ·
+  <a href="#近期目标">近期目标</a> ·
+  <a href="#进度">进度</a>
+</p>
+
 我是 `sirius-coding`，一个专注于 Java 后端、微服务架构和 AI 应用落地的技术实践账号。
+
+我希望这个主页传达一件事：
+把工程能力沉淀成可以复用、可以持续演进、可以真正落地的技术资产。
 
 ## 主页速览
 
@@ -17,7 +32,7 @@
 | --- | --- |
 | 经验 | `10` 年 Java 相关开发经验 |
 | 定位 | Java 高级开发工程师 |
-| 主线 | Spring 生态、Spring Cloud Alibaba、Spring AI、RAG、Agent |
+| 主线 | Spring 生态、Spring Cloud Alibaba、Spring AI、Spring AI Alibaba、RAG、Agent |
 | 目标 | 把复杂能力沉淀成可复用的组件、脚手架和项目模板 |
 
 ## 我是谁
@@ -25,6 +40,38 @@
 - 长期专注后端架构、微服务治理、AI 应用和企业级系统落地
 - 关注真正能进入业务场景的工程化实践，而不是只停留在概念验证
 - 喜欢把常见能力做成可复用的基础设施，减少重复造轮子
+- 习惯用脚手架、模板和通用组件提升团队交付效率
+
+## 能力画像
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <h3>后端与架构</h3>
+      <ul>
+        <li>Java / Spring Boot / Spring Cloud</li>
+        <li>Spring Cloud Alibaba / Dubbo / gRPC</li>
+        <li>Redis / RabbitMQ / Kafka / MySQL</li>
+      </ul>
+    </td>
+    <td width="33%" valign="top">
+      <h3>AI 与智能体</h3>
+      <ul>
+        <li>Spring AI / Spring AI Alibaba</li>
+        <li>RAG / Agent / Prompt Engineering</li>
+        <li>企业级 AI 与传统业务融合</li>
+      </ul>
+    </td>
+    <td width="33%" valign="top">
+      <h3>工程化与提效</h3>
+      <ul>
+        <li>Web 微服务公共能力</li>
+        <li>统一返回 / 异常 / 鉴权 / 链路</li>
+        <li>Claude Code / Codex / Vibe Coding</li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
 ## 核心能力
 
@@ -62,6 +109,14 @@
 - 自动化开发流程
 - 模板化工程
 - 可维护性设计
+
+## 代表性成果
+
+- 企业级 Spring Cloud Alibaba 微服务体系
+- 高并发视频流与实时分析平台
+- AI 招聘 / 面试 / 匹配类产品
+- 训练管理、忠诚度测评、监狱智能监控等多模态系统
+- 大型企业流程系统与 OA / HR 系统的微服务化升级
 
 ## 代表项目
 
