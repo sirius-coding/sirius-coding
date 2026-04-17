@@ -90,6 +90,24 @@ docker compose -f docker/docker-compose.pgvector.yml up -d
 
 如果你需要改端口，启动前设置 `PGVECTOR_PORT`，例如 `PGVECTOR_PORT=15432 ./scripts/pgvector-up.sh`。
 
+## 云服务器部署
+
+后端可通过 Docker Compose 在云服务器上运行，默认复用云上已有 PostgreSQL + pgvector：
+
+```bash
+docker compose -f docker/docker-compose.cloud.yml up -d --build
+```
+
+对外端口：
+
+- `26000/tcp`：后端 API
+
+默认配置会：
+
+- 使用云服务器本机的 `5432` PostgreSQL
+- 开启 `sirius.vectorstore`
+- 关闭 DeepSeek，保持集成测试可重复
+
 ## 启动
 
 ```bash
