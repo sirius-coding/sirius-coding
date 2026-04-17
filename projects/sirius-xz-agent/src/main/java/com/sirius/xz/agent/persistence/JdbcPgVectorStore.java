@@ -51,12 +51,20 @@ public class JdbcPgVectorStore implements PgVectorStore {
     @Override
     public List<ChunkSearchResult> search(float[] queryVector, int limit) {
         return jdbcTemplate.query("""
-                select document_id, document_title, chunk_index, chunk_text, tags, embedding
+                select
+                    document_id,
+                    document_title,
+                    chunk_index,
+                    chunk_text,
+                    tags,
+                    embedding,
+                    1.0 / (1.0 + (embedding <-> ?::vector)) as similarity
                 from knowledge_chunk
                 order by embedding <-> ?::vector
                 limit ?
                 """,
             rowMapper(),
+            PgVectorSql.toVectorLiteral(queryVector),
             PgVectorSql.toVectorLiteral(queryVector),
             limit);
     }
@@ -77,7 +85,7 @@ public class JdbcPgVectorStore implements PgVectorStore {
             resultSet.getInt("chunk_index"),
             resultSet.getString("chunk_text"),
             List.of((String[]) resultSet.getArray("tags").getArray()),
-            1.0d
+            resultSet.getDouble("similarity")
         );
     }
 }

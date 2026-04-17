@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ public class KnowledgeController {
         this(knowledgeBase, null);
     }
 
+    @Autowired
     public KnowledgeController(KnowledgeBase knowledgeBase, KnowledgeIngestionService knowledgeIngestionService) {
         this.knowledgeBase = knowledgeBase;
         this.knowledgeIngestionService = knowledgeIngestionService;
