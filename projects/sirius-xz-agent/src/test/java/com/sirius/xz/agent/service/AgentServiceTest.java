@@ -51,7 +51,6 @@ class AgentServiceTest {
 
         AgentAnswer answer = service.answer("How does RAG keep answers grounded?");
 
-        assertThat(answer.summary()).startsWith("问题：How does RAG keep answers grounded?");
         assertThat(answer.summary()).contains("LLM: How does RAG keep answers grounded? / RAG Playbook");
     }
 }

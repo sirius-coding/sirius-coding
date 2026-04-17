@@ -72,11 +72,23 @@ export SPRING_DATASOURCE_PASSWORD=postgres
 docker compose -f docker/docker-compose.pgvector.yml up -d
 ```
 
+一键启动脚本：
+
+```bash
+./scripts/pgvector-up.sh
+```
+
 验证扩展和基础向量查询：
 
 ```bash
 ./scripts/pgvector-smoke.sh
 ```
+
+### 对外端口
+
+- `5432/tcp`：PostgreSQL + `pgvector`
+
+如果你需要改端口，启动前设置 `PGVECTOR_PORT`，例如 `PGVECTOR_PORT=15432 ./scripts/pgvector-up.sh`。
 
 ## 启动
 
