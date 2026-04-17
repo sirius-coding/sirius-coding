@@ -19,24 +19,72 @@ public class RetrievalService {
         this.knowledgeBase = knowledgeBase;
     }
 
-    public List<KnowledgeDocument> findRelevantDocuments(String question, int limit) {
+    public List<KnowledgeSearchResult> search(String question, int limit) {
         Set<String> questionTokens = tokens(question);
         return knowledgeBase.documents().stream()
-            .sorted(Comparator.comparingInt((KnowledgeDocument doc) -> score(doc, questionTokens)).reversed())
-            .filter(doc -> score(doc, questionTokens) > 0)
+            .map(document -> new KnowledgeSearchResult(
+                document,
+                score(document, questionTokens),
+                matchedTokens(document, questionTokens)
+            ))
+            .filter(result -> result.score() > 0)
+            .sorted(Comparator
+                .comparingInt(KnowledgeSearchResult::score)
+                .reversed()
+                .thenComparing(result -> result.document().title().toLowerCase(Locale.ROOT))
+                .thenComparing(result -> result.document().id()))
             .limit(limit)
             .collect(Collectors.toList());
     }
 
+    public List<KnowledgeDocument> findRelevantDocuments(String question, int limit) {
+        return search(question, limit).stream()
+            .map(KnowledgeSearchResult::document)
+            .toList();
+    }
+
     int score(KnowledgeDocument document, Set<String> questionTokens) {
-        Set<String> docTokens = tokens(document.searchableText());
         int overlap = 0;
+        Set<String> titleTokens = tokens(document.title());
+        Set<String> contentTokens = tokens(document.content());
+        Set<String> idTokens = tokens(document.id());
+        Set<String> tagTokens = document.tags().stream()
+            .flatMap(tag -> tokens(tag).stream())
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+
         for (String token : questionTokens) {
-            if (docTokens.contains(token)) {
-                overlap++;
+            if (titleTokens.contains(token)) {
+                overlap += 5;
+            }
+            if (idTokens.contains(token)) {
+                overlap += 3;
+            }
+            if (tagTokens.contains(token)) {
+                overlap += 2;
+            }
+            if (contentTokens.contains(token)) {
+                overlap += 1;
             }
         }
         return overlap;
+    }
+
+    List<String> matchedTokens(KnowledgeDocument document, Set<String> questionTokens) {
+        Set<String> titleTokens = tokens(document.title());
+        Set<String> contentTokens = tokens(document.content());
+        Set<String> idTokens = tokens(document.id());
+        Set<String> tagTokens = document.tags().stream()
+            .flatMap(tag -> tokens(tag).stream())
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        return questionTokens.stream()
+            .filter(token ->
+                titleTokens.contains(token)
+                    || contentTokens.contains(token)
+                    || idTokens.contains(token)
+                    || tagTokens.contains(token)
+            )
+            .toList();
     }
 
     private Set<String> tokens(String text) {

@@ -2,6 +2,7 @@ package com.sirius.xz.agent.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.sirius.xz.agent.domain.KnowledgeDocument;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -33,4 +34,3 @@ class AgentServiceTest {
             .containsExactly("RAG Playbook");
     }
 }
-

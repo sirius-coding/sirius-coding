@@ -14,7 +14,7 @@ Spring AI / Spring AI Alibaba / RAG / Agent 方向的样板项目，用来沉淀
 | --- | --- |
 | 目标 | 建立 AI 应用的工程边界 |
 | 场景 | 对话、检索增强、工具调用、Agent 编排 |
-| 现状 | 可运行的离线 RAG 样板 + 示例接口 |
+| 现状 | 可运行的离线 RAG 样板 + 结构化问答 + 知识库管理 |
 
 ## 目标
 
@@ -27,6 +27,7 @@ Spring AI / Spring AI Alibaba / RAG / Agent 方向的样板项目，用来沉淀
 - Spring Boot Web 骨架
 - `/api/agent/summary` 示例接口
 - `/api/agent/ask` 检索增强问答接口
+- `/api/knowledge/documents` 知识库管理接口
 - 标准化的目录与包名
 - GitHub Actions CI
 
@@ -36,6 +37,13 @@ Spring AI / Spring AI Alibaba / RAG / Agent 方向的样板项目，用来沉淀
 - 加入向量检索与知识库
 - 增加工具调用和 Agent 编排
 - 补齐真实模型接入与持久化知识库
+- 把当前的规则检索替换为真实向量检索和模型生成
+
+## 当前行为
+
+- 检索结果会返回分数、命中 token 和来源文档
+- 问答结果会返回结构化回答、置信度和参考来源
+- 知识库支持查询、按 id 查看和 upsert
 
 ## 启动
 
