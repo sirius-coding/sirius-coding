@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: sirius-xz-agent-pgvector
+    environment:
+      POSTGRES_DB: sirius_xz_agent
+      POSTGRES_USER: sirius
+      POSTGRES_PASSWORD: sirius
+    ports:
+      - "${PGVECTOR_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sirius -d sirius_xz_agent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - pgvector-data:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d:ro
+
+volumes:
+  pgvector-data:

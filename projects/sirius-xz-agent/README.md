@@ -64,6 +64,20 @@ export SPRING_DATASOURCE_PASSWORD=postgres
 
 默认保留离线 fallback，不配置时也能运行。
 
+## pgvector 集成测试
+
+本地或云服务器上都可以直接起 PostgreSQL + pgvector：
+
+```bash
+docker compose -f docker/docker-compose.pgvector.yml up -d
+```
+
+验证扩展和基础向量查询：
+
+```bash
+./scripts/pgvector-smoke.sh
+```
+
 ## 启动
 
 ```bash
