@@ -28,6 +28,7 @@ Spring AI / Spring AI Alibaba / RAG / Agent 方向的样板项目，用来沉淀
 - `/api/agent/summary` 示例接口
 - `/api/agent/ask` 检索增强问答接口
 - 标准化的目录与包名
+- GitHub Actions CI
 
 ## 路线图
 
