@@ -55,3 +55,9 @@ curl http://localhost:8082/api/health
 - `src/main/java`：应用与示例接口
 - `src/main/resources`：基础配置
 - `README.md`：微服务脚手架说明与演进计划
+
+## Workspace alignment
+
+This project is the Spring Cloud starter execution layer of the Sirius Coding Evolution Station. It keeps service implementation, local tests, Spring Cloud integration choices, and project-level CI inside the project. Reusable starter rules, publication checks, and scaffold conventions should be promoted back to the root workspace docs and skills.
+
+License: Apache-2.0 under this project `LICENSE` unless a file states otherwise.

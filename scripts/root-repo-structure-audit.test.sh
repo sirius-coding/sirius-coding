@@ -13,6 +13,7 @@ create_clean_fixture() {
   mkdir -p \
     "${root}/.codex" \
     "${root}/docs/ops" \
+    "${root}/assets" \
     "${root}/skills/workspace-multi-env-delivery" \
     "${root}/specs/review" \
     "${root}/specs/workspace" \
@@ -24,6 +25,22 @@ create_clean_fixture() {
 
 - [Agent Rules](./AGENTS.md)
 - [Opening Model](./docs/ops/workspace-opening-model.md)
+EOF
+
+  cat > "${root}/LICENSE" <<'EOF'
+Apache License fixture
+EOF
+
+  cat > "${root}/NOTICE" <<'EOF'
+Sirius Coding fixture notice
+EOF
+
+  cat > "${root}/COMMERCIALIZATION.md" <<'EOF'
+# Commercialization
+EOF
+
+  cat > "${root}/assets/hero.svg" <<'EOF'
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><title>Sirius fixture</title></svg>
 EOF
 
   cat > "${root}/AGENTS.md" <<'EOF'
@@ -80,6 +97,28 @@ EOF
 # Core Assets Map
 EOF
 
+  cat > "${root}/specs/workspace/independent-repo-alignment.md" <<'EOF'
+# Independent Repository Alignment
+EOF
+
+  cat > "${root}/specs/workspace/module-roadmap.md" <<'EOF'
+# Module Roadmap
+EOF
+
+  for project in sirius-xz-agent sirius-xz-agent-ui sirius-cloud-starter sirius-web-toolkit; do
+    mkdir -p "${root}/projects/${project}"
+    cat > "${root}/projects/${project}/README.md" <<'EOF'
+# Fixture project
+
+## Workspace alignment
+
+This project inherits the root workspace rules.
+EOF
+    cat > "${root}/projects/${project}/LICENSE" <<'EOF'
+Apache License fixture
+EOF
+  done
+
   cat > "${root}/scripts/root-repo-structure-audit.sh" <<'EOF'
 #!/usr/bin/env bash
 echo fixture
@@ -128,5 +167,37 @@ if [[ "${sensitive_status}" -eq 0 ]]; then
 fi
 
 assert_contains "${sensitive_output}" "Sensitive pattern found"
+
+missing_license_fixture="${TMP_ROOT}/missing-license"
+create_clean_fixture "${missing_license_fixture}"
+rm "${missing_license_fixture}/LICENSE"
+
+set +e
+missing_license_output="$("${SCRIPT}" "${missing_license_fixture}" 2>&1)"
+missing_license_status="$?"
+set -e
+
+if [[ "${missing_license_status}" -eq 0 ]]; then
+  echo "Expected missing license fixture to fail audit" >&2
+  exit 1
+fi
+
+assert_contains "${missing_license_output}" "missing required path: LICENSE"
+
+missing_alignment_fixture="${TMP_ROOT}/missing-alignment"
+create_clean_fixture "${missing_alignment_fixture}"
+perl -0pi -e 's/\n## Workspace alignment\n\nThis project inherits the root workspace rules\.\n//' "${missing_alignment_fixture}/projects/sirius-xz-agent/README.md"
+
+set +e
+missing_alignment_output="$("${SCRIPT}" "${missing_alignment_fixture}" 2>&1)"
+missing_alignment_status="$?"
+set -e
+
+if [[ "${missing_alignment_status}" -eq 0 ]]; then
+  echo "Expected missing alignment fixture to fail audit" >&2
+  exit 1
+fi
+
+assert_contains "${missing_alignment_output}" "missing workspace alignment section"
 
 echo "root-repo-structure-audit tests passed"

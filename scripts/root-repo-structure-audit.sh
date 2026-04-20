@@ -27,6 +27,9 @@ require_path() {
 check_required_paths() {
   local paths=(
     "README.md"
+    "LICENSE"
+    "NOTICE"
+    "COMMERCIALIZATION.md"
     "AGENTS.md"
     ".codex/config.toml"
     "docs"
@@ -45,6 +48,9 @@ check_required_paths() {
     "specs/workspace/public-private-boundary.md"
     "specs/workspace/evolution-handbook.md"
     "specs/workspace/core-assets-map.md"
+    "specs/workspace/independent-repo-alignment.md"
+    "specs/workspace/module-roadmap.md"
+    "assets/hero.svg"
   )
 
   for path in "${paths[@]}"; do
@@ -169,6 +175,45 @@ PY
   fi
 }
 
+check_project_alignment_sections() {
+  local projects=(
+    "projects/sirius-xz-agent/README.md"
+    "projects/sirius-xz-agent-ui/README.md"
+    "projects/sirius-cloud-starter/README.md"
+    "projects/sirius-web-toolkit/README.md"
+  )
+
+  for rel in "${projects[@]}"; do
+    if [[ ! -f "${ROOT}/${rel}" ]]; then
+      fail "missing project README: ${rel}"
+      continue
+    fi
+
+    if grep -q '^## Workspace alignment$' "${ROOT}/${rel}"; then
+      pass "project README has workspace alignment section: ${rel}"
+    else
+      fail "missing workspace alignment section: ${rel}"
+    fi
+  done
+}
+
+check_project_licenses() {
+  local licenses=(
+    "projects/sirius-xz-agent/LICENSE"
+    "projects/sirius-xz-agent-ui/LICENSE"
+    "projects/sirius-cloud-starter/LICENSE"
+    "projects/sirius-web-toolkit/LICENSE"
+  )
+
+  for rel in "${licenses[@]}"; do
+    if [[ -f "${ROOT}/${rel}" ]]; then
+      pass "project license exists: ${rel}"
+    else
+      fail "missing project license: ${rel}"
+    fi
+  done
+}
+
 scan_sensitive_patterns() {
   local ip_pattern="223\\.109\\.140\\.60"
   local ssh_alias_pattern="sirius-cloud"'-root'
@@ -212,6 +257,8 @@ main() {
   check_yaml
   check_toml
   check_readme_links
+  check_project_alignment_sections
+  check_project_licenses
   scan_sensitive_patterns
 
   if [[ "${failures}" -gt 0 ]]; then

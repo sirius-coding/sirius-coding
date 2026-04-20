@@ -49,3 +49,9 @@ mvn spring-boot:run
 - `src/main/java`：公共类型和处理器
 - `src/main/resources`：默认配置
 - `README.md`：组件定位与扩展方向
+
+## Workspace alignment
+
+This project is the reusable Web toolkit execution layer of the Sirius Coding Evolution Station. It keeps response models, exception handling, request context, tests, and starter-packaging decisions inside the project. Reusable review standards, release checks, and toolkit publication conventions should be promoted back to the root workspace docs and skills.
+
+License: Apache-2.0 under this project `LICENSE` unless a file states otherwise.

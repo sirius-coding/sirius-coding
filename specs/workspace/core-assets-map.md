@@ -12,6 +12,9 @@
 | `AGENTS.md` | 根仓库代理规则，定义事实源优先级、工作边界、护栏、默认流程和 Evolution 输出。 | Root agent rules defining fact-source priority, work boundaries, guardrails, default workflow, and Evolution output. |
 | `.codex/config.toml` | Codex 本地配置，占位并启用当前工作站需要的 agent 能力。 | Local Codex configuration for workspace-level agent capabilities. |
 | `.gitignore` | 忽略构建产物、IDE 文件、工作树和私有环境登记文件。 | Ignores build outputs, IDE files, worktrees, and private environment registry files. |
+| `LICENSE` | Apache-2.0 许可证文本，定义当前公开代码和文档的开源授权。 | Apache-2.0 license text for current public code and documentation. |
+| `NOTICE` | 项目版权和 Sirius 品牌边界说明。 | Copyright and Sirius brand-boundary notice. |
+| `COMMERCIALIZATION.md` | 未来部分商用的边界和可选路径说明。 | Boundary and options for future partial commercialization. |
 | `pom.xml` | 根 Maven 聚合入口，连接 Java 子项目的构建。 | Root Maven aggregation entry that connects Java child project builds. |
 
 ## 规则与规范 / Rules and Specs
@@ -22,6 +25,8 @@
 | `specs/workspace/workstation-operating-rules.md` | 工作站运行规则摘要，适合作为快速执行规范。 | Concise workstation operating rules for quick execution. |
 | `specs/workspace/public-private-boundary.md` | 公开/私有知识边界，规定哪些信息可以进入公开仓库。 | Public/private knowledge boundary defining what can be committed to the public repository. |
 | `specs/workspace/core-assets-map.md` | 当前文件，双语说明核心目录和文件职责。 | This file; bilingual map of core files and directories. |
+| `specs/workspace/independent-repo-alignment.md` | 独立仓库与根工作站目标对齐标准。 | Alignment standard between independent repositories and the root evolution station. |
+| `specs/workspace/module-roadmap.md` | 根模块和子项目模块的持续完善路线。 | Continuous-improvement roadmap for root modules and project modules. |
 | `specs/review/code_review.md` | 默认代码审查标准，约束 review 输出和验证要求。 | Default code review standard covering findings, review order, and verification expectations. |
 
 ## 文档与运维 / Docs and Operations

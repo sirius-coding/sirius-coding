@@ -125,3 +125,9 @@ curl "http://localhost:8081/api/agent/summary?name=Sirius"
 - `src/main/java`：应用代码
 - `src/main/resources`：配置文件
 - `README.md`：项目说明与后续演进方向
+
+## Workspace alignment
+
+This project is the Agent/RAG backend execution layer of the Sirius Coding Evolution Station. It keeps implementation, tests, API behavior, Docker assets, and project-level release logic inside the project. Reusable lessons about environment modeling, release evidence, public/private boundaries, and delivery workflow should be promoted back to the root workspace docs and skills.
+
+License: Apache-2.0 under this project `LICENSE` unless a file states otherwise.

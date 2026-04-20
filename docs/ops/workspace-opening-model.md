@@ -20,6 +20,8 @@ Standardize how projects under this workspace root are created, published, and o
 - Workspace operating rules: `specs/workspace/workstation-operating-rules.md`
 - Public/private boundary: `specs/workspace/public-private-boundary.md`
 - Core assets map: `specs/workspace/core-assets-map.md`
+- Independent repo alignment: `specs/workspace/independent-repo-alignment.md`
+- Module roadmap: `specs/workspace/module-roadmap.md`
 - Code review standard: `specs/review/code_review.md`
 - Root repository audit: `scripts/root-repo-structure-audit.sh`
 

@@ -20,7 +20,8 @@
   <a href="#进化闭环">进化闭环</a> ·
   <a href="#核心资产">核心资产</a> ·
   <a href="#项目执行层">项目执行层</a> ·
-  <a href="#安全边界">安全边界</a>
+  <a href="#安全边界">安全边界</a> ·
+  <a href="#许可证">许可证</a>
 </p>
 
 ## 核心定位
@@ -60,6 +61,8 @@ This repository is not only a GitHub profile README and not only a project colle
 | [Cloud Deploy Checklist](./docs/sirius-xz-agent-cloud-deploy-checklist.md) | 云端发布与联调检查清单 |
 | [Reusable Delivery Skill](./skills/workspace-multi-env-delivery/SKILL.md) | 多环境交付、独立仓库发布和部署排障复用流程 |
 | [Root Repo Audit Script](./scripts/root-repo-structure-audit.sh) | 根仓库结构和公开脱敏检查脚本 |
+| [Independent Repo Alignment](./specs/workspace/independent-repo-alignment.md) | 独立仓库与根工作站目标对齐标准 |
+| [Module Roadmap](./specs/workspace/module-roadmap.md) | 根模块和子项目模块的持续完善路线 |
 
 ## 项目执行层
 
@@ -89,6 +92,12 @@ cp docs/ops/environment-registry.private.example.yaml docs/ops/environment-regis
 ```
 
 该脚本检查必备控制层文件、README 本地链接、YAML/TOML 可解析性、私有环境文件未被追踪，以及公开资产中是否出现已知敏感值。
+
+## 许可证
+
+本仓库当前采用 [Apache License 2.0](./LICENSE)。未来商业化边界见 [COMMERCIALIZATION.md](./COMMERCIALIZATION.md)。
+
+Sirius 名称、品牌方向和视觉标识按 [NOTICE](./NOTICE) 中的品牌边界说明使用。
 
 ## 当前主线
 
