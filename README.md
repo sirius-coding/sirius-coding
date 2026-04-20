@@ -1,188 +1,98 @@
-# Sirius Coding
+# Sirius Coding Evolution Station
 
-> Java / Spring / Spring Cloud / Spring Cloud Alibaba / Spring AI / Spring AI Alibaba / RAG / Vibe Coding
+> 一个把工作方式、项目经验、发布证据、审查标准和自动化检查持续沉淀为可复用资产的进化式开发工作站。
+>
+> An evolving development station that turns workflow, project experience, release evidence, review standards, and automation checks into reusable assets.
 
 <p align="center">
-  <img src="assets/hero.svg" alt="Sirius Coding banner" />
+  <img src="assets/hero.svg" alt="Sirius Coding Evolution Station banner" />
 </p>
 
 <p align="left">
+  <img src="https://img.shields.io/badge/Workspace-Evolution-111827?style=for-the-badge" alt="Workspace Evolution" />
+  <img src="https://img.shields.io/badge/Codex-Agent%20Rules-2563EB?style=for-the-badge" alt="Codex Agent Rules" />
   <img src="https://img.shields.io/badge/Java-21-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21" />
-  <img src="https://img.shields.io/badge/Spring-6-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring" />
-  <img src="https://img.shields.io/badge/Spring%20Cloud-Alibaba-00A1A7?style=for-the-badge" alt="Spring Cloud Alibaba" />
-  <img src="https://img.shields.io/badge/AI%20Engineering-RAG%20%7C%20Agent-111827?style=for-the-badge" alt="AI Engineering" />
+  <img src="https://img.shields.io/badge/Spring%20AI-RAG%20%7C%20Agent-16A34A?style=for-the-badge" alt="Spring AI RAG Agent" />
 </p>
 
 <p align="center">
-  <a href="#主页速览">主页速览</a> ·
-  <a href="#核心能力">核心能力</a> ·
-  <a href="#代表项目">代表项目</a> ·
-  <a href="#近期目标">近期目标</a> ·
-  <a href="#进度">进度</a>
+  <a href="#核心定位">核心定位</a> ·
+  <a href="#进化闭环">进化闭环</a> ·
+  <a href="#核心资产">核心资产</a> ·
+  <a href="#项目执行层">项目执行层</a> ·
+  <a href="#安全边界">安全边界</a>
 </p>
 
-我是 `sirius-coding`，一个专注于 Java 后端、微服务架构和 AI 应用落地的技术实践账号。
+## 核心定位
 
-我希望这个主页传达一件事：
-把工程能力沉淀成可以复用、可以持续演进、可以真正落地的技术资产。
+这个仓库不只是 GitHub 主页，也不只是项目合集。它是 `sirius-coding` 的公开工作站根仓库，负责把长期有效的协作方式显式化、资产化、可检查化。
 
-## 主页速览
+This repository is not only a GitHub profile README and not only a project collection. It is the public workspace root for `sirius-coding`, designed to make durable collaboration patterns explicit, reusable, and auditable.
 
-| 重点 | 内容 |
+| 层级 / Layer | 职责 / Responsibility |
 | --- | --- |
-| 经验 | `10` 年 Java 相关开发经验 |
-| 定位 | Java 高级开发工程师 |
-| 主线 | Spring 生态、Spring Cloud Alibaba、Spring AI、Spring AI Alibaba、RAG、Agent |
-| 目标 | 把复杂能力沉淀成可复用的组件、脚手架和项目模板 |
+| 根仓库 / Root workspace | 规则、强记忆、共享 skill、审查标准、发布模型、公开/私有边界 |
+| 项目层 / Project layer | 业务实现、测试、构建、部署、项目级文档和发布质量 |
+| 进化层 / Evolution layer | 每次任务结束后沉淀经验、抽取流程、补齐护栏、推进自动化 |
 
-## 我是谁
+## 进化闭环
 
-- 长期专注后端架构、微服务治理、AI 应用和企业级系统落地
-- 关注真正能进入业务场景的工程化实践，而不是只停留在概念验证
-- 喜欢把常见能力做成可复用的基础设施，减少重复造轮子
-- 习惯用脚手架、模板和通用组件提升团队交付效率
+本工作站围绕五个动作持续演进：
 
-## 能力画像
+1. **主动记忆**：把长期规则写入仓库，而不是留在一次会话中。
+2. **主动复用**：把重复流程升级为 `skills/`、模板或脚本。
+3. **主动护栏**：在发布、同步、改结构、公开文档前做边界检查。
+4. **主动验证**：用测试、构建、静态扫描和烟测证据支撑结论。
+5. **主动复盘**：每次任务输出 `Evolution`，判断哪些经验应继续沉淀。
 
-<table>
-  <tr>
-    <td width="33%" valign="top">
-      <h3>后端与架构</h3>
-      <ul>
-        <li>Java / Spring Boot / Spring Cloud</li>
-        <li>Spring Cloud Alibaba / Dubbo / gRPC</li>
-        <li>Redis / RabbitMQ / Kafka / MySQL</li>
-      </ul>
-    </td>
-    <td width="33%" valign="top">
-      <h3>AI 与智能体</h3>
-      <ul>
-        <li>Spring AI / Spring AI Alibaba</li>
-        <li>RAG / Agent / Prompt Engineering</li>
-        <li>企业级 AI 与传统业务融合</li>
-      </ul>
-    </td>
-    <td width="33%" valign="top">
-      <h3>工程化与提效</h3>
-      <ul>
-        <li>Web 微服务公共能力</li>
-        <li>统一返回 / 异常 / 鉴权 / 链路</li>
-        <li>Claude Code / Codex / Vibe Coding</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+## 核心资产
 
-## 核心能力
+| 资产 / Asset | 说明 / Description |
+| --- | --- |
+| [AGENTS.md](./AGENTS.md) | 根仓库代理规则，定义事实源优先级、根/项目边界、护栏和输出结构 |
+| [Evolution Handbook](./specs/workspace/evolution-handbook.md) | 进化手册全文持久化版本，是本工作站的核心目标说明 |
+| [Workspace Opening Model](./docs/ops/workspace-opening-model.md) | 项目加入、发布形态和目录契约 |
+| [Core Assets Map](./specs/workspace/core-assets-map.md) | 核心文件和目录的中文/英文双语索引 |
+| [Public / Private Boundary](./specs/workspace/public-private-boundary.md) | 公开仓库脱敏规则和私有覆盖文件约定 |
+| [Code Review Standard](./specs/review/code_review.md) | 默认代码审查标准 |
+| [Environment Registry](./docs/ops/environment-registry.yaml) | 公开环境模型，真实环境值不进入仓库 |
+| [Private Registry Example](./docs/ops/environment-registry.private.example.yaml) | 私有环境登记示例，复制后填入本地忽略文件 |
+| [Cloud Deploy Checklist](./docs/sirius-xz-agent-cloud-deploy-checklist.md) | 云端发布与联调检查清单 |
+| [Reusable Delivery Skill](./skills/workspace-multi-env-delivery/SKILL.md) | 多环境交付、独立仓库发布和部署排障复用流程 |
+| [Root Repo Audit Script](./scripts/root-repo-structure-audit.sh) | 根仓库结构和公开脱敏检查脚本 |
 
-### 后端主线
+## 项目执行层
 
-- Java 核心技术
-- Spring Boot
-- Spring Cloud
-- Spring Cloud Alibaba
-- Dubbo / gRPC
-- Nacos / Redis / RabbitMQ / Kafka / MySQL
+`projects/` 下的子项目保留实现职责，根仓库只沉淀跨项目可复用方法。
 
-### AI 主线
+| 项目 / Project | 方向 / Direction |
+| --- | --- |
+| [sirius-xz-agent](./projects/sirius-xz-agent) | Spring AI Alibaba / DeepSeek / pgvector / RAG / Agent 样板 |
+| [sirius-xz-agent-ui](./projects/sirius-xz-agent-ui) | 面向 Agent 的前端控制台 |
+| [sirius-cloud-starter](./projects/sirius-cloud-starter) | Spring Cloud Alibaba 微服务起步骨架 |
+| [sirius-web-toolkit](./projects/sirius-web-toolkit) | Web 微服务公共能力组件 |
 
-- Spring AI
-- Spring AI Alibaba
-- RAG 检索增强生成
-- Agent 代理架构
-- Prompt Engineering
-- 企业级 AI 与传统业务融合
+## 安全边界
 
-### 工程化方向
+这个仓库按公开仓库维护。可公开沉淀结构、流程、模板、匿名化拓扑和检查项；不公开真实服务器账号、凭证、密钥、精确私有主机、敏感路径和登录细节。
 
-- Web 微服务开发
-- 统一返回体
-- 全局异常处理
-- 网关与鉴权
-- 日志、链路追踪、配置治理
-- 组件化封装与脚手架
+真实环境值应放在本地忽略文件：
 
-### 提效方向
+```bash
+cp docs/ops/environment-registry.private.example.yaml docs/ops/environment-registry.private.yaml
+```
 
-- Vibe Coding
-- Claude Code / Codex
-- 自动化开发流程
-- 模板化工程
-- 可维护性设计
+## 本地检查
 
-## 代表性成果
+```bash
+./scripts/root-repo-structure-audit.sh
+```
 
-- 企业级 Spring Cloud Alibaba 微服务体系
-- 高并发视频流与实时分析平台
-- AI 招聘 / 面试 / 匹配类产品
-- 训练管理、忠诚度测评、监狱智能监控等多模态系统
-- 大型企业流程系统与 OA / HR 系统的微服务化升级
+该脚本检查必备控制层文件、README 本地链接、YAML/TOML 可解析性、私有环境文件未被追踪，以及公开资产中是否出现已知敏感值。
 
-## 代表项目
+## 当前主线
 
-<table>
-  <tr>
-    <td width="33%" valign="top">
-      <h3><a href="https://github.com/sirius-coding/sirius-xz-agent">sirius-xz-agent</a></h3>
-      <p>Spring AI Alibaba / DeepSeek / pgvector / RAG / Agent 第一版样板，支持结构化问答、知识库管理和 PostgreSQL 向量检索接入。</p>
-    </td>
-    <td width="33%" valign="top">
-      <h3><a href="./projects/sirius-xz-agent-ui">sirius-xz-agent-ui</a></h3>
-      <p>面向 sirius-xz-agent 的前端控制台，覆盖 Agent 概览、问答、知识库编辑和接口调试。</p>
-    </td>
-    <td width="33%" valign="top">
-      <h3><a href="https://github.com/sirius-coding/sirius-cloud-starter">sirius-cloud-starter</a></h3>
-      <p>Spring Cloud Alibaba 微服务第一版起步骨架，面向注册发现、配置治理、Feign 调用、网关接入等场景。</p>
-    </td>
-    <td width="33%" valign="top">
-      <h3><a href="https://github.com/sirius-coding/sirius-web-toolkit">sirius-web-toolkit</a></h3>
-      <p>Web 微服务公共工具第一版，沉淀统一返回、异常处理、请求上下文和可复用基础能力。</p>
-    </td>
-  </tr>
-</table>
-
-## 运维与发布资产
-
-- [Workspace Opening Model](./docs/ops/workspace-opening-model.md)
-- [Environment Registry](./docs/ops/environment-registry.yaml)
-- [Cloud Deploy Checklist](./docs/sirius-xz-agent-cloud-deploy-checklist.md)
-- [Reusable Delivery Skill](./skills/workspace-multi-env-delivery/SKILL.md)
-
-## 我做过什么
-
-- 搭建过企业级 Spring Cloud Alibaba 微服务体系
-- 做过高并发视频流与实时分析平台
-- 做过 AI 招聘 / 面试 / 匹配类产品
-- 做过训练管理、忠诚度测评、监狱智能监控等多模态系统
-- 参与过大型企业流程系统与 OA / HR 系统的微服务化和架构升级
-
-## 技术标签
-
-`Java` `Spring Boot` `Spring Cloud` `Spring Cloud Alibaba` `Spring AI` `Spring AI Alibaba` `RAG` `Agent` `Nacos` `Redis` `RabbitMQ` `Kafka` `MySQL` `Docker` `K8s` `Claude Code` `Codex`
-
-## 经验标签
-
-- 企业级微服务架构
-- 高并发与分布式系统
-- AI 应用工程化
-- 多模态业务落地
-- 开发效率与可维护性
-
-## 近期目标
-
-1. 把 `sirius-xz-agent` 做成可持续演进的 AI 应用样板
-2. 补齐 `sirius-cloud-starter` 的微服务基础能力
-3. 继续沉淀 `sirius-web-toolkit` 的公共组件
-4. 用更少的重复劳动完成更多可复用工程能力
-
-## 进度
-
-<p>
-  <img src="https://github-readme-stats.vercel.app/api?username=sirius-coding&show_icons=true&hide_title=true&hide_border=true&count_private=true&theme=transparent" alt="GitHub Stats" height="150" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=sirius-coding&layout=compact&hide_border=true&theme=transparent" alt="Top Languages" height="150" />
-</p>
-
-## 联系方式
-
-如果你想看更多内容，直接看我的仓库和提交历史即可。
-我不在主页公开手机号、邮箱和住址等隐私信息。
+1. 让进化手册成为仓库强记忆。
+2. 让 README 成为进化式工作站的公开入口。
+3. 让根仓库结构、公开/私有边界和发布资产可审计。
+4. 逐步把重复检查升级为脚本、workflow，再考虑插件化。

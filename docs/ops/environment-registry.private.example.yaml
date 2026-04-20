@@ -1,0 +1,30 @@
+version: 1
+visibility: "private-example"
+owner: "sirius-coding"
+
+environments:
+  - id: "cloud-integration"
+    purpose: "integration-and-smoke"
+    ssh:
+      alias: "<private-ssh-alias>"
+      host: "<private-host-or-ip>"
+      user: "<private-ssh-user>"
+    paths:
+      workspace_root: "<remote-workspace-root>"
+      backend_dir: "<remote-backend-dir>"
+      frontend_dir: "<remote-frontend-dir>"
+    services:
+      - name: "sirius-xz-agent-backend"
+        kind: "backend"
+        public_port: "<backend-public-port>"
+        health_path: "/actuator/health"
+      - name: "sirius-xz-agent-ui"
+        kind: "frontend"
+        public_port: "<frontend-public-port>"
+      - name: "sirius-xz-agent-pgvector"
+        kind: "database"
+        public_port: "<database-public-port>"
+        internal_db: "sirius_xz_agent"
+    notes:
+      - "copy this file to docs/ops/environment-registry.private.yaml and fill real values locally"
+      - "never commit the private file"

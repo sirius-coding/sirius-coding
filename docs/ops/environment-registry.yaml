@@ -1,10 +1,13 @@
-version: 1
-last_updated: "2026-04-18"
+version: 2
+last_updated: "2026-04-20"
 owner: "sirius-coding"
+visibility: "public"
+private_overlay: "docs/ops/environment-registry.private.yaml"
 
 environments:
   - id: "cloud-integration"
     purpose: "integration-and-smoke"
+    exposure: "private-values-redacted"
     ssh:
       alias: "<private-ssh-alias>"
       host: "<private-host-or-ip>"
@@ -16,19 +19,19 @@ environments:
     services:
       - name: "sirius-xz-agent-backend"
         kind: "backend"
-        public_port: 26000
+        public_port: "<backend-public-port>"
         health_path: "/actuator/health"
       - name: "sirius-xz-agent-ui"
         kind: "frontend"
-        public_port: 26100
+        public_port: "<frontend-public-port>"
       - name: "sirius-xz-agent-pgvector"
         kind: "database"
-        public_port: 5432
+        public_port: "<database-public-port>"
         internal_db: "sirius_xz_agent"
     notes:
       - "release order: pgvector -> backend -> frontend"
       - "frontend proxies /api and /actuator to backend service name"
-      - "health endpoint expected: http://<host>:26100/actuator/health"
+      - "real environment values belong in the ignored private overlay"
 
   - id: "template-new-environment"
     purpose: "fill-when-adding-new-server"

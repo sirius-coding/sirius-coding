@@ -8,3 +8,4 @@ target/
 *.iml
 个人简历 10_副本.md
 .worktrees/
+docs/ops/environment-registry.private.yaml

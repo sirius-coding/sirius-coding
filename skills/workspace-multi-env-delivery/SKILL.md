@@ -27,9 +27,14 @@ Use when any of these happen:
 - Workspace opening model:
   - `docs/ops/workspace-opening-model.md`
 - Server/environment registry:
-  - `docs/ops/environment-registry.yaml`
+  - public model: `docs/ops/environment-registry.yaml`
+  - private local overlay: `docs/ops/environment-registry.private.yaml`
 - Deploy/release checklist:
   - `docs/sirius-xz-agent-cloud-deploy-checklist.md`
+- Public/private boundary:
+  - `specs/workspace/public-private-boundary.md`
+- Root repository audit:
+  - `scripts/root-repo-structure-audit.sh`
 
 ## Core Workflow
 
@@ -45,8 +50,9 @@ Pick one:
 
 Before first deploy to any server:
 
-1. Add or update one environment item in `docs/ops/environment-registry.yaml`.
-2. Include `ssh alias`, `host`, `paths`, `ports`, `service names`.
+1. Add or update the public environment item in `docs/ops/environment-registry.yaml` with placeholders when values are sensitive.
+2. Add real `ssh alias`, `host`, `paths`, `ports`, and service names to ignored `docs/ops/environment-registry.private.yaml`.
+3. Never commit the private overlay.
 
 ### Step 3: Release using checklist
 
@@ -56,6 +62,8 @@ Follow `docs/sirius-xz-agent-cloud-deploy-checklist.md` strictly:
 2. Sync artifacts to server.
 3. Start DB -> backend -> frontend.
 4. Run smoke tests and negative checks.
+5. Keep release evidence free of real private host details when committing public notes.
+6. Run `./scripts/root-repo-structure-audit.sh` before committing root delivery docs.
 
 ### Step 4: Evidence capture
 

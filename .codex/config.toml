@@ -1,0 +1,5 @@
+# Workspace-local Codex configuration.
+# Shared behavioral rules live in ../AGENTS.md and specs/.
+
+[features]
+multi_agent = true

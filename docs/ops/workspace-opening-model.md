@@ -2,13 +2,26 @@
 
 ## Purpose
 
-Standardize how projects under `<workspace-root>` are created, published, and operated as the workspace grows.
+Standardize how projects under this workspace root are created, published, and operated as the workspace grows.
 
 ## Directory Contract
 
 - `projects/`: all runnable projects live here
 - `docs/`: cross-project documentation, runbooks, and architecture notes
 - `skills/`: reusable execution skills for future delivery/ops tasks
+- `specs/`: workspace rules, review standards, and reusable control-plane specs
+- `.codex/`: local Codex configuration only
+
+## Control Layer
+
+- Root agent rules: `AGENTS.md`
+- Codex local config: `.codex/config.toml`
+- Evolution handbook: `specs/workspace/evolution-handbook.md`
+- Workspace operating rules: `specs/workspace/workstation-operating-rules.md`
+- Public/private boundary: `specs/workspace/public-private-boundary.md`
+- Core assets map: `specs/workspace/core-assets-map.md`
+- Code review standard: `specs/review/code_review.md`
+- Root repository audit: `scripts/root-repo-structure-audit.sh`
 
 ## Project Exposure Modes
 
@@ -46,7 +59,8 @@ git subtree push --prefix=projects/<project-name> <remote-name> main
 Use when project is deployed to one or more servers.
 
 - Keep deployment assets in project directory (`docker-compose`, nginx config, Dockerfile)
-- Keep environment inventory in `docs/ops/environment-registry.yaml`
+- Keep public environment inventory in `docs/ops/environment-registry.yaml`
+- Keep real environment values in ignored private overlay `docs/ops/environment-registry.private.yaml`
 - Use the same release checklist across environments
 
 ## Required Rules
@@ -58,6 +72,7 @@ Use when project is deployed to one or more servers.
    - smoke checks
    - rollback note
 4. Any new server/environment must be recorded in `docs/ops/environment-registry.yaml`.
+5. Public docs must not expose real server accounts, exact private hosts, credentials, or sensitive remote paths.
 
 ## Release Artifacts (Minimum)
 
@@ -76,3 +91,7 @@ For each deployable project:
 - Frontend: `projects/sirius-xz-agent-ui`
 - Cross-project checklist: `docs/sirius-xz-agent-cloud-deploy-checklist.md`
 - Reusable skill: `skills/workspace-multi-env-delivery/SKILL.md`
+- Root rules: `AGENTS.md`
+- Evolution handbook: `specs/workspace/evolution-handbook.md`
+- Core assets map: `specs/workspace/core-assets-map.md`
+- Review standard: `specs/review/code_review.md`

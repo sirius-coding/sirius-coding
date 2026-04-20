@@ -1,18 +1,30 @@
 # sirius-xz-agent 云端发布与联调检查清单
 
-> 适用范围：`sirius-xz-agent`（后端，26000）+ `sirius-xz-agent-ui`（前端，26100）  
-> 云服务器：`<private-ssh-alias>`（`<private-host-or-ip>`）  
+> 适用范围：`sirius-xz-agent`（后端）+ `sirius-xz-agent-ui`（前端）
+> 环境事实源：公开模型见 `docs/ops/environment-registry.yaml`，真实值放在本地忽略文件 `docs/ops/environment-registry.private.yaml`。
 > 目标：稳定发布、快速验收、减少回归与误判。
+
+以下命令默认从仓库根目录执行。发布前先在本地 shell 设置私有环境变量，不要把真实值提交到公开文档：
+
+```bash
+export WORKSPACE_ROOT="$(pwd)"
+export SSH_ALIAS="<private-ssh-alias>"
+export REMOTE_BACKEND_DIR="<remote-backend-dir>"
+export REMOTE_FRONTEND_DIR="<remote-frontend-dir>"
+export PUBLIC_HOST="<private-host-or-ip>"
+export BACKEND_PORT="<backend-public-port>"
+export FRONTEND_PORT="<frontend-public-port>"
+```
 
 ## 1. 发布前检查（必须全部通过）
 
 ### 1.1 本地代码与构建
 
 ```bash
-cd <workspace-root>/projects/sirius-xz-agent
+cd "${WORKSPACE_ROOT}/projects/sirius-xz-agent"
 mvn -q -DskipTests package
 
-cd <workspace-root>/projects/sirius-xz-agent-ui
+cd "${WORKSPACE_ROOT}/projects/sirius-xz-agent-ui"
 npm run build
 ```
 
@@ -29,7 +41,7 @@ npm run build
 ### 1.3 云端连通性检查
 
 ```bash
-ssh -o ConnectTimeout=5 -o BatchMode=yes <private-ssh-alias> 'echo ok'
+ssh -o ConnectTimeout=5 -o BatchMode=yes "${SSH_ALIAS}" 'echo ok'
 ```
 
 如果这里失败，先不要发布，先恢复 SSH/网络。
@@ -39,16 +51,16 @@ ssh -o ConnectTimeout=5 -o BatchMode=yes <private-ssh-alias> 'echo ok'
 ### 2.1 同步代码到云端
 
 ```bash
-rsync -a --delete <workspace-root>/projects/sirius-xz-agent/ <private-ssh-alias>:<remote-backend-dir>/
-rsync -a --delete <workspace-root>/projects/sirius-xz-agent-ui/ <private-ssh-alias>:<remote-frontend-dir>/
+rsync -a --delete "${WORKSPACE_ROOT}/projects/sirius-xz-agent/" "${SSH_ALIAS}:${REMOTE_BACKEND_DIR}/"
+rsync -a --delete "${WORKSPACE_ROOT}/projects/sirius-xz-agent-ui/" "${SSH_ALIAS}:${REMOTE_FRONTEND_DIR}/"
 ```
 
 ### 2.2 先启动数据库，再发布后端，再发布前端
 
 ```bash
-ssh <private-ssh-alias> 'docker start sirius-xz-agent-pgvector || true'
-ssh <private-ssh-alias> 'cd <remote-backend-dir> && docker compose -f docker/docker-compose.cloud.yml up -d --build backend'
-ssh <private-ssh-alias> 'cd <remote-frontend-dir> && docker compose -f docker/docker-compose.cloud.yml up -d --build frontend'
+ssh "${SSH_ALIAS}" 'docker start sirius-xz-agent-pgvector || true'
+ssh "${SSH_ALIAS}" "cd \"${REMOTE_BACKEND_DIR}\" && docker compose -f docker/docker-compose.cloud.yml up -d --build backend"
+ssh "${SSH_ALIAS}" "cd \"${REMOTE_FRONTEND_DIR}\" && docker compose -f docker/docker-compose.cloud.yml up -d --build frontend"
 ```
 
 ## 3. 发布后验收（必须全部通过）
@@ -56,24 +68,24 @@ ssh <private-ssh-alias> 'cd <remote-frontend-dir> && docker compose -f docker/do
 ### 3.1 容器状态
 
 ```bash
-ssh <private-ssh-alias> 'docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" | grep -E "sirius-xz-agent-pgvector|sirius-xz-agent-backend|sirius-xz-agent-ui"'
-ssh <private-ssh-alias> 'docker inspect -f "{{.State.Status}} {{if .State.Health}}{{.State.Health.Status}}{{else}}nohealth{{end}}" sirius-xz-agent-pgvector'
+ssh "${SSH_ALIAS}" 'docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" | grep -E "sirius-xz-agent-pgvector|sirius-xz-agent-backend|sirius-xz-agent-ui"'
+ssh "${SSH_ALIAS}" 'docker inspect -f "{{.State.Status}} {{if .State.Health}}{{.State.Health.Status}}{{else}}nohealth{{end}}" sirius-xz-agent-pgvector'
 ```
 
 期望：
 - `pgvector`：`running healthy`
-- `backend`：`Up` 且有 `26000->26000`
-- `ui`：`Up` 且有 `26100->26100`
+- `backend`：`Up` 且端口映射符合私有环境登记
+- `ui`：`Up` 且端口映射符合私有环境登记
 
 ### 3.2 外网接口验收
 
 ```bash
-curl -sS -i --max-time 10 'http://<private-host-or-ip>:26000/api/agent/summary?name=Sirius' | sed -n '1,20p'
-curl -sS -i --max-time 10 'http://<private-host-or-ip>:26000/actuator/health' | sed -n '1,20p'
-curl -sS -i --max-time 10 'http://<private-host-or-ip>:26100/' | sed -n '1,20p'
-curl -sS -i --max-time 10 'http://<private-host-or-ip>:26100/api/agent/summary?name=Sirius' | sed -n '1,20p'
-curl -sS -i --max-time 10 'http://<private-host-or-ip>:26100/api/knowledge/documents' | sed -n '1,20p'
-curl -sS -i --max-time 10 'http://<private-host-or-ip>:26100/actuator/health' | sed -n '1,20p'
+curl -sS -i --max-time 10 "http://${PUBLIC_HOST}:${BACKEND_PORT}/api/agent/summary?name=Sirius" | sed -n '1,20p'
+curl -sS -i --max-time 10 "http://${PUBLIC_HOST}:${BACKEND_PORT}/actuator/health" | sed -n '1,20p'
+curl -sS -i --max-time 10 "http://${PUBLIC_HOST}:${FRONTEND_PORT}/" | sed -n '1,20p'
+curl -sS -i --max-time 10 "http://${PUBLIC_HOST}:${FRONTEND_PORT}/api/agent/summary?name=Sirius" | sed -n '1,20p'
+curl -sS -i --max-time 10 "http://${PUBLIC_HOST}:${FRONTEND_PORT}/api/knowledge/documents" | sed -n '1,20p'
+curl -sS -i --max-time 10 "http://${PUBLIC_HOST}:${FRONTEND_PORT}/actuator/health" | sed -n '1,20p'
 ```
 
 期望：
@@ -83,7 +95,7 @@ curl -sS -i --max-time 10 'http://<private-host-or-ip>:26100/actuator/health' | 
 ### 3.3 负向校验（防回归）
 
 ```bash
-curl -sS -i --max-time 10 'http://<private-host-or-ip>:26100/api/actuator/health' | sed -n '1,20p'
+curl -sS -i --max-time 10 "http://${PUBLIC_HOST}:${FRONTEND_PORT}/api/actuator/health" | sed -n '1,20p'
 ```
 
 期望：
@@ -93,8 +105,8 @@ curl -sS -i --max-time 10 'http://<private-host-or-ip>:26100/api/actuator/health
 
 ### 4.1 页面能开但 API 不通
 
-1. 先测后端直连：`26000/api/...`
-2. 再测前端代理：`26100/api/...`
+1. 先测后端直连：`<backend-public-port>/api/...`
+2. 再测前端代理：`<frontend-public-port>/api/...`
 3. 看前端 Nginx 上游是否可达（容器名是否正确）
 
 ### 4.2 报 CORS 但同时有 502/timeout
@@ -105,7 +117,7 @@ curl -sS -i --max-time 10 'http://<private-host-or-ip>:26100/api/actuator/health
 ### 4.3 后端反复重启
 
 ```bash
-ssh <private-ssh-alias> 'docker logs --tail 200 sirius-xz-agent-backend'
+ssh "${SSH_ALIAS}" 'docker logs --tail 200 sirius-xz-agent-backend'
 ```
 
 重点看：
@@ -116,8 +128,8 @@ ssh <private-ssh-alias> 'docker logs --tail 200 sirius-xz-agent-backend'
 ### 4.4 数据库容器异常
 
 ```bash
-ssh <private-ssh-alias> 'docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Networks}}" | grep sirius-xz-agent-pgvector'
-ssh <private-ssh-alias> 'docker logs --tail 120 sirius-xz-agent-pgvector'
+ssh "${SSH_ALIAS}" 'docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Networks}}" | grep sirius-xz-agent-pgvector'
+ssh "${SSH_ALIAS}" 'docker logs --tail 120 sirius-xz-agent-pgvector'
 ```
 
 `pgvector` 非 `running healthy` 时，后端发布没有意义。
