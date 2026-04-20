@@ -108,6 +108,30 @@ docker compose -f docker/docker-compose.cloud.yml up -d --build
 - 开启 `sirius.vectorstore`
 - 关闭 DeepSeek，保持集成测试可重复
 
+## 云端集成冒烟
+
+仓库保留了手动触发的 GitHub Actions 云端冒烟工作流：`.github/workflows/cloud-integration.yml`。
+
+该工作流会通过 SSH 建立本地隧道，启动远端 `pgvector`，再运行：
+
+```bash
+./scripts/run-cloud-integration.sh
+```
+
+需要在独立仓库中配置以下 GitHub Secrets：
+
+- `SIRIUS_CLOUD_SSH_PRIVATE_KEY`
+- `SIRIUS_CLOUD_SSH_KNOWN_HOSTS`
+- `SIRIUS_CLOUD_SSH_HOST_ALIAS`
+- `SIRIUS_CLOUD_SSH_HOST_NAME`
+- `SIRIUS_CLOUD_SSH_USER`
+- `SIRIUS_CLOUD_REMOTE_ROOT`
+
+可选 GitHub Variables：
+
+- `SIRIUS_CLOUD_TUNNEL_PORT`
+- `SIRIUS_CLOUD_REMOTE_PG_PORT`
+
 ## 启动
 
 ```bash
