@@ -30,7 +30,7 @@ Use when any of these happen:
   - public model: `docs/ops/environment-registry.yaml`
   - private local overlay: `docs/ops/environment-registry.private.yaml`
 - Deploy/release checklist:
-  - `docs/sirius-xz-agent-cloud-deploy-checklist.md`
+  - project-owned checklist under `projects/<project-name>/docs/` or a mother-only checklist under `docs/mother/`
 - Public/private boundary:
   - `specs/workspace/public-private-boundary.md`
 - Root repository audit:
@@ -56,7 +56,7 @@ Before first deploy to any server:
 
 ### Step 3: Release using checklist
 
-Follow `docs/sirius-xz-agent-cloud-deploy-checklist.md` strictly:
+Follow the project-owned or mother-only release checklist strictly:
 
 1. Local build passes.
 2. Sync artifacts to server.

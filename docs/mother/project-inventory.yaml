@@ -1,0 +1,15 @@
+version: 1
+description: "Mother-repository project inventory. This file is excluded from the reusable template."
+projects:
+  - path: "projects/sirius-xz-agent"
+    kind: "backend"
+    responsibility: "RAG / Agent business implementation"
+  - path: "projects/sirius-xz-agent-ui"
+    kind: "frontend"
+    responsibility: "Agent console business implementation"
+  - path: "projects/sirius-cloud-starter"
+    kind: "starter"
+    responsibility: "Spring Cloud Alibaba scaffold implementation"
+  - path: "projects/sirius-web-toolkit"
+    kind: "library"
+    responsibility: "Reusable web microservice toolkit implementation"

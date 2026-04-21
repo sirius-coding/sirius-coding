@@ -23,10 +23,9 @@ Track what "continue improving all modules" means for the root evolution station
 
 | Project | Root-Owned Improvement | Project-Owned Improvement |
 | --- | --- | --- |
-| `sirius-xz-agent` | Release checklist, environment model, public/private boundary | RAG implementation, model providers, vector store, API behavior |
-| `sirius-xz-agent-ui` | Repo exposure mode, public-safe docs, proxy lessons | UI workflows, API client behavior, visual polish |
-| `sirius-cloud-starter` | Starter template rules and publication checklist | Spring Cloud integrations, service discovery, config center |
-| `sirius-web-toolkit` | Reusable toolkit positioning and publication checklist | Response model, exception handling, request context, starter packaging |
+| `projects/<project-name>` | Exposure mode, public-safe docs, environment model, reusable release lessons | Implementation, tests, build, deployment details, project-specific specs |
+
+Mother-repository project details live in `docs/mother/project-inventory.yaml` and do not flow into the template repository.
 
 ## Next Iteration Candidates
 

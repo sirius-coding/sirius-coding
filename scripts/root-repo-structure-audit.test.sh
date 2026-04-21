@@ -198,6 +198,11 @@ exclude:
     - "projects"
 EOF
 
+  cat > "${root}/docs/template/repository-role.yaml" <<'EOF'
+role: "mother"
+description: "Fixture mother repository."
+EOF
+
   cat > "${root}/docs/adoption/quick-start.md" <<'EOF'
 # Quick Start
 EOF
@@ -274,7 +279,17 @@ EOF
 # Module Roadmap
 EOF
 
-  for project in sirius-xz-agent sirius-xz-agent-ui sirius-cloud-starter sirius-web-toolkit; do
+  mkdir -p "${root}/docs/mother"
+  cat > "${root}/docs/mother/project-inventory.yaml" <<'EOF'
+version: 1
+projects:
+  - path: "projects/mother-backend"
+  - path: "projects/mother-frontend"
+  - path: "projects/mother-starter"
+  - path: "projects/mother-toolkit"
+EOF
+
+  for project in mother-backend mother-frontend mother-starter mother-toolkit; do
     mkdir -p "${root}/projects/${project}"
     cat > "${root}/projects/${project}/README.md" <<'EOF'
 # Fixture project
@@ -380,7 +395,7 @@ clean_output="$("${SCRIPT}" "${clean_fixture}")"
 assert_contains "${clean_output}" "Audit passed"
 
 strict_output="$("${SCRIPT}" "${clean_fixture}" --strict)"
-assert_contains "${strict_output}" "Audit profile: root"
+assert_contains "${strict_output}" "Audit profile: mother"
 assert_contains "${strict_output}" "Audit passed"
 
 json_output="$("${SCRIPT}" "${clean_fixture}" --strict --json)"
@@ -390,7 +405,7 @@ import sys
 
 data = json.loads(sys.argv[1])
 assert data["status"] == "passed", data
-assert data["profile"] == "root", data
+assert data["profile"] == "mother", data
 assert data["strict"] is True, data
 assert data["failures"] == [], data
 PY
@@ -398,11 +413,46 @@ PY
 template_fixture="${TMP_ROOT}/template"
 cp -R "${clean_fixture}" "${template_fixture}"
 rm -rf "${template_fixture}/projects"
+rm -rf "${template_fixture}/docs/mother"
 rm -f "${template_fixture}/.github/workflows/sync-template.yml"
+perl -0pi -e 's/role: "mother"/role: "template"/' "${template_fixture}/docs/template/repository-role.yaml"
 
-template_output="$("${SCRIPT}" "${template_fixture}" --strict)"
-assert_contains "${template_output}" "Audit profile: template"
+template_output="$("${SCRIPT}" "${template_fixture}" --strict --profile template-release)"
+assert_contains "${template_output}" "Audit profile: template-release"
 assert_contains "${template_output}" "Audit passed"
+
+adopter_fixture="${TMP_ROOT}/adopter"
+cp -R "${template_fixture}" "${adopter_fixture}"
+mkdir -p "${adopter_fixture}/projects/fruits-card"
+cat > "${adopter_fixture}/projects/fruits-card/README.md" <<'EOF'
+# Fruits Card
+
+## Workspace alignment
+
+This project adopts the reusable workspace rules.
+EOF
+cat > "${adopter_fixture}/projects/fruits-card/LICENSE" <<'EOF'
+Apache License fixture
+EOF
+
+adopter_output="$("${SCRIPT}" "${adopter_fixture}" --strict)"
+assert_contains "${adopter_output}" "Audit profile: adopter"
+assert_contains "${adopter_output}" "Audit passed"
+
+template_release_with_project="${TMP_ROOT}/template-release-with-project"
+cp -R "${adopter_fixture}" "${template_release_with_project}"
+
+set +e
+template_release_output="$("${SCRIPT}" "${template_release_with_project}" --strict --profile template-release 2>&1)"
+template_release_status="$?"
+set -e
+
+if [[ "${template_release_status}" -eq 0 ]]; then
+  echo "Expected template-release profile to fail when projects/ is present" >&2
+  exit 1
+fi
+
+assert_contains "${template_release_output}" "forbidden path exists: projects"
 
 sensitive_fixture="${TMP_ROOT}/sensitive"
 create_clean_fixture "${sensitive_fixture}"
@@ -442,7 +492,7 @@ assert_contains "${missing_license_output}" "missing required path: LICENSE"
 
 missing_alignment_fixture="${TMP_ROOT}/missing-alignment"
 create_clean_fixture "${missing_alignment_fixture}"
-perl -0pi -e 's/\n## Workspace alignment\n\nThis project inherits the root workspace rules\.\n//' "${missing_alignment_fixture}/projects/sirius-xz-agent/README.md"
+perl -0pi -e 's/\n## Workspace alignment\n\nThis project inherits the root workspace rules\.\n//' "${missing_alignment_fixture}/projects/mother-backend/README.md"
 
 set +e
 missing_alignment_output="$("${SCRIPT}" "${missing_alignment_fixture}" 2>&1)"

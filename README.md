@@ -11,7 +11,7 @@
 <p align="left">
   <img src="https://img.shields.io/badge/Workspace-Evolution-111827?style=for-the-badge" alt="Workspace Evolution" />
   <img src="https://img.shields.io/badge/Control%20Layer-OS-111827?style=for-the-badge" alt="Control Layer OS" />
-  <img src="https://img.shields.io/badge/Version-4.0.0-0F766E?style=for-the-badge" alt="Version 4.0.0" />
+  <img src="https://img.shields.io/badge/Version-4.0.1-0F766E?style=for-the-badge" alt="Version 4.0.1" />
   <img src="https://img.shields.io/badge/Codex-Agent%20Rules-2563EB?style=for-the-badge" alt="Codex Agent Rules" />
   <img src="https://img.shields.io/badge/Java-21-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21" />
   <img src="https://img.shields.io/badge/Spring%20AI-RAG%20%7C%20Agent-16A34A?style=for-the-badge" alt="Spring AI RAG Agent" />
@@ -107,7 +107,8 @@ Control Layer OS 不替代业务项目。它管理业务项目之外的“如何
 | [Code Review Standard](./specs/review/code_review.md) | 默认代码审查标准 |
 | [Environment Registry](./docs/ops/environment-registry.yaml) | 公开环境模型，真实环境值不进入仓库 |
 | [Private Registry Example](./docs/ops/environment-registry.private.example.yaml) | 私有环境登记示例，复制后填入本地忽略文件 |
-| [Cloud Deploy Checklist](./docs/sirius-xz-agent-cloud-deploy-checklist.md) | 云端发布与联调检查清单 |
+| [Mother Project Inventory](./docs/mother/project-inventory.yaml) | 母仓具体项目清单，不进入模板库 |
+| [Mother Deploy Checklist](./docs/mother/sirius-xz-agent-cloud-deploy-checklist.md) | 母仓业务项目云端发布与联调检查清单，不进入模板库 |
 | [Reusable Delivery Skill](./skills/workspace-multi-env-delivery/SKILL.md) | 多环境交付、独立仓库发布和部署排障复用流程 |
 | [Template Adoption Skill](./skills/template-adoption/SKILL.md) | 使用模板创建新工作站的复用流程 |
 | [Root Repo Audit Script](./scripts/root-repo-structure-audit.sh) | 根仓库结构和公开脱敏检查脚本 |
@@ -121,7 +122,7 @@ Control Layer OS 不替代业务项目。它管理业务项目之外的“如何
 
 ## 版本与模板库
 
-当前控制层版本是 [`4.0.0`](./VERSION)。根工作站按 SemVer 维护：大版本代表工作站运行模型或模板边界变化，小版本代表新增可复用能力，补丁版本用于文档、脚本或检查修正。
+当前控制层版本是 [`4.0.1`](./VERSION)。根工作站按 SemVer 维护：大版本代表工作站运行模型或模板边界变化，小版本代表新增可复用能力，补丁版本用于文档、脚本或检查修正。
 
 模板库用于复制本工作站的可复用控制层，不包含当前仓库的业务实现。大版本稳定后，从当前仓库同步到 `sirius-coding/sirius-evolution-station-template`：
 

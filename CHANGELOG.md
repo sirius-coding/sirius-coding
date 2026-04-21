@@ -4,6 +4,15 @@ All notable workspace-level changes are tracked here.
 
 This repository uses SemVer for the reusable evolution station. Business implementation changes under `projects/` are not template-version drivers unless they create reusable root assets.
 
+## [4.0.1] - 2026-04-21
+
+### Fixed
+
+- Decoupled template adoption audits from mother-repository project checks.
+- Added explicit repository-role detection for mother, template release, and adopted-template profiles.
+- Prevented template exports from carrying mother-only project inventory, deployment checklists, local `.DS_Store` files, and stale GitHub helper folders.
+- Generalized template-bound docs, skills, and environment examples so adopted workspaces can add their own `projects/<project-name>` without inheriting Sirius mother-project requirements.
+
 ## [4.0.0] - 2026-04-21
 
 ### Added
@@ -54,6 +63,7 @@ This repository uses SemVer for the reusable evolution station. Business impleme
 - Persisted the evolution handbook as the workspace's long-term operating model.
 - Added root governance assets, audit scripts, environment registry, and reusable delivery skill.
 
+[4.0.1]: https://github.com/sirius-coding/sirius-coding/releases/tag/v4.0.1
 [4.0.0]: https://github.com/sirius-coding/sirius-coding/releases/tag/v4.0.0
 [3.0.0]: https://github.com/sirius-coding/sirius-coding/releases/tag/v3.0.0
 [2.0.0]: https://github.com/sirius-coding/sirius-coding/releases/tag/v2.0.0

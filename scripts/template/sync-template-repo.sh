@@ -101,7 +101,7 @@ done < <(read_manifest_list "exclude.paths")
 
 if [[ "${CHECK}" == true ]]; then
   bash "${ROOT}/scripts/template/template-repo-audit.sh" "${OUTPUT}"
-  bash "${ROOT}/scripts/root-repo-structure-audit.sh" "${OUTPUT}" --strict
+  bash "${ROOT}/scripts/root-repo-structure-audit.sh" "${OUTPUT}" --strict --profile template-release
   exit 0
 fi
 
@@ -132,21 +132,18 @@ for rel in "${exclude_paths[@]}"; do
   rm -rf "${OUTPUT}/${rel}"
 done
 
-rm -rf \
-  "${OUTPUT}/projects" \
-  "${OUTPUT}/pom.xml" \
-  "${OUTPUT}/docs/sirius-xz-agent-cloud-deploy-checklist.md" \
-  "${OUTPUT}/docs/superpowers" \
-  "${OUTPUT}/docs/ops/environment-registry.private.yaml" \
-  "${OUTPUT}/.worktrees" \
-  "${OUTPUT}/.git" \
-  "${OUTPUT}/target" \
-  "${OUTPUT}/node_modules"
+find "${OUTPUT}" -name ".DS_Store" -type f -delete
+
+mkdir -p "${OUTPUT}/docs/template"
+cat > "${OUTPUT}/docs/template/repository-role.yaml" <<'EOF'
+role: "template"
+description: "Reusable Sirius Evolution Station template snapshot. Adding projects/ makes audits run in adopter mode."
+EOF
 
 node "${ROOT}/scripts/template/sync-template-readme.mjs" "${ROOT}/README.md" "${OUTPUT}/README.md"
 
 template_audit_output="$(bash "${ROOT}/scripts/template/template-repo-audit.sh" "${OUTPUT}")"
-root_audit_output="$(bash "${ROOT}/scripts/root-repo-structure-audit.sh" "${OUTPUT}" --strict)"
+root_audit_output="$(bash "${ROOT}/scripts/root-repo-structure-audit.sh" "${OUTPUT}" --strict --profile template-release)"
 
 print_summary() {
   echo "Included paths:"
@@ -207,7 +204,7 @@ if [[ "${CREATE_PR}" == true ]]; then
   cp -R "${OUTPUT}/." "${clone_dir}/"
 
   bash "${ROOT}/scripts/template/template-repo-audit.sh" "${clone_dir}" >/dev/null
-  bash "${ROOT}/scripts/root-repo-structure-audit.sh" "${clone_dir}" --strict >/dev/null
+  bash "${ROOT}/scripts/root-repo-structure-audit.sh" "${clone_dir}" --strict --profile template-release >/dev/null
 
   git -C "${clone_dir}" add -A
   if git -C "${clone_dir}" diff --cached --quiet; then

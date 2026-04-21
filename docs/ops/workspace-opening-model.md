@@ -89,9 +89,8 @@ For each deployable project:
 
 ## Current Baseline
 
-- Backend: `projects/sirius-xz-agent`
-- Frontend: `projects/sirius-xz-agent-ui`
-- Cross-project checklist: `docs/sirius-xz-agent-cloud-deploy-checklist.md`
+- Template adopters should create implementation under `projects/<project-name>`.
+- Deployed projects should keep project-specific deployment checklists under their own project directory or in a private, non-template operations area.
 - Reusable skill: `skills/workspace-multi-env-delivery/SKILL.md`
 - Root rules: `AGENTS.md`
 - Evolution handbook: `specs/workspace/evolution-handbook.md`

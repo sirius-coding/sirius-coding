@@ -48,7 +48,7 @@
 | `docs/releases/release-history.md` | 版本治理、模板同步节奏和发布边界说明。 | Version governance, template sync cadence, and release boundary notes. |
 | `docs/template/template-manifest.yaml` | 模板库同步清单，定义可进入模板的根资产和必须排除的业务/私有资产。 | Template sync manifest defining reusable root assets and excluded business/private assets. |
 | `examples/minimal-project-layout/` | 新工作站最小项目布局示例。 | Minimal project layout example for a new workspace. |
-| `docs/sirius-xz-agent-cloud-deploy-checklist.md` | `sirius-xz-agent` 云端发布、联调、烟测和排障清单。 | Cloud deploy, integration, smoke-test, and triage checklist for `sirius-xz-agent`. |
+| `docs/mother/` | 母仓专属项目清单、发布清单和业务项目运维资料；不进入模板库。 | Mother-repository project inventory, release checklists, and business-project operations material; excluded from the template repository. |
 | `docs/superpowers/specs/` | 历史设计规格，用于记录已完成或计划中的设计决策。 | Historical design specs recording completed or planned design decisions. |
 | `docs/superpowers/plans/` | 历史实施计划，用于记录可复现的任务拆分和执行路径。 | Historical implementation plans recording reproducible task breakdowns and execution paths. |
 
@@ -66,7 +66,7 @@
 | `scripts/template-repo.test.sh` | 模板同步链路测试，验证业务项目不会进入模板库。 | Template sync test verifying business projects do not enter the template repository. |
 | `scripts/github/setup-root-project.sh` | GitHub Projects 初始化脚本，创建或复用根工作站路线看板和初始议题。 | GitHub Projects setup script that creates or reuses the root-workstation roadmap board and seed issues. |
 | `.github/workflows/root-audit.yml` | push / PR 时运行 strict 根审计。 | Runs strict root audit on push and pull request. |
-| `.github/workflows/sync-template.yml` | 母仓 main 更新或手动触发时生成模板同步 PR。 | Creates template sync PRs when mother-repo main changes or workflow dispatch runs. |
+| `docs/template/repository-role.yaml` | 仓库角色标记，用来区分母仓、模板发布态和模板采用态。 | Repository role marker distinguishing the mother repository, template release snapshot, and adopted template workspace. |
 | `scripts/diagram/` | 图形生成 pipeline 脚本目录，包含 intent、layout、SVG 和 prompt 阶段。 | Diagram pipeline scripts for intent, layout, SVG, and prompt stages. |
 | `scripts/generate-diagrams.mjs` | 图形生成兼容入口，转发到 `scripts/diagram/build-all.mjs`。 | Compatibility diagram generator entrypoint delegating to `scripts/diagram/build-all.mjs`. |
 | `scripts/diagram-pipeline.test.sh` | 图形 pipeline 测试，验证语义建模、版式规划、SVG 和 image prompt。 | Diagram pipeline test verifying intent modeling, layout planning, SVG, and image prompt output. |
@@ -77,10 +77,8 @@
 
 | 路径 / Path | 中文说明 | English Description |
 | --- | --- | --- |
-| `projects/sirius-xz-agent/` | RAG / Agent 后端样板，负责业务实现、测试、Docker 和项目级文档。 | RAG / Agent backend sample responsible for implementation, tests, Docker assets, and project docs. |
-| `projects/sirius-xz-agent-ui/` | Agent 前端控制台，负责 UI、API 调试页、知识库编辑和构建资产。 | Agent frontend console covering UI, API inspection, knowledge editing, and build assets. |
-| `projects/sirius-cloud-starter/` | Spring Cloud Alibaba 起步骨架。 | Spring Cloud Alibaba starter skeleton. |
-| `projects/sirius-web-toolkit/` | Web 微服务公共组件样板。 | Web microservice toolkit sample. |
+| `projects/<project-name>/` | 项目执行目录，负责业务实现、测试、构建、部署资产和项目级文档。 | Project execution directory for implementation, tests, builds, deployment assets, and project-level docs. |
+| `docs/mother/project-inventory.yaml` | 母仓中的具体项目清单；模板采用者应维护自己的项目清单。 | Concrete project inventory in the mother repository; template adopters should maintain their own inventory. |
 
 ## 资产归属原则 / Ownership Principles
 

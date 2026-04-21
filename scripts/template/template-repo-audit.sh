@@ -53,6 +53,7 @@ required_paths=(
   "docs/adoption/mother-repo-relationship.md"
   "docs/releases/release-history.md"
   "docs/template/template-manifest.yaml"
+  "docs/template/repository-role.yaml"
   "docs/diagrams/README.md"
   "docs/ops/github-project-roadmap.md"
   "docs/ops/workspace-opening-model.md"
@@ -81,7 +82,8 @@ forbidden_paths=(
   "projects"
   "pom.xml"
   ".github/workflows/sync-template.yml"
-  "docs/sirius-xz-agent-cloud-deploy-checklist.md"
+  ".github/java-upgrade"
+  "docs/mother"
   "docs/superpowers"
   "docs/ops/environment-registry.private.yaml"
 )
@@ -93,6 +95,12 @@ done
 for rel in "${forbidden_paths[@]}"; do
   forbid_path "${rel}"
 done
+
+if grep -q '^role: "template"$' "${ROOT}/docs/template/repository-role.yaml"; then
+  pass "repository role is template"
+else
+  fail "repository role must be template"
+fi
 
 if command -v python3 >/dev/null 2>&1; then
   if python3 - "${ROOT}" <<'PY'
@@ -134,10 +142,9 @@ fi
 
 ip_pattern="223\\.109"
 ssh_alias_pattern="sirius-cloud"'-root'
-remote_root_pattern="/root/"'sirius-xz-agent-it'
 root_at_pattern='root''@'
 private_key_pattern='BEGIN (RSA |OPENSSH |EC )?PRIVATE KEY'
-sensitive_pattern="${ip_pattern}|${ssh_alias_pattern}|${remote_root_pattern}|${root_at_pattern}|${private_key_pattern}"
+sensitive_pattern="${ip_pattern}|${ssh_alias_pattern}|${root_at_pattern}|${private_key_pattern}"
 
 if grep -RInI -E "${sensitive_pattern}" "${ROOT}" \
   --exclude-dir=.git \

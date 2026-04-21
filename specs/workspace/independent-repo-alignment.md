@@ -19,24 +19,21 @@ Every independent or potentially independent project should have:
 
 ## Current Projects
 
+Template adopters should maintain their own project inventory outside reusable template assets. Use this shape for each project:
+
 | Project | Exposure | Alignment Status | Next Action |
 | --- | --- | --- | --- |
-| `sirius-xz-agent` | Independent backend candidate | Local README and project LICENSE aligned | Keep business implementation project-owned; promote reusable release lessons to root docs |
-| `sirius-xz-agent-ui` | Independent frontend repository | Local README and project LICENSE aligned | Keep UI implementation project-owned; promote shared API/proxy lessons to root delivery skill |
-| `sirius-cloud-starter` | Independent scaffold candidate | Local README and project LICENSE aligned | Keep Spring Cloud implementation project-owned; promote starter template rules to root |
-| `sirius-web-toolkit` | Independent toolkit candidate | Local README and project LICENSE aligned | Keep library code project-owned; promote reusable review and release checks to root |
+| `projects/<project-name>` | Monorepo-only, independent repo, or deployed service | README, license, verification, and public/private boundary status | Keep implementation project-owned; promote reusable lessons to root docs or skills |
+
+The mother repository may keep a concrete project inventory in `docs/mother/project-inventory.yaml`, which is excluded from template sync.
 
 ## Remote Inspection
 
-Checked on 2026-04-21 with `gh repo view`:
+For each independently published project, inspect the remote repository before release:
 
 | Repository | Visibility | Remote License Metadata | Alignment Need |
 | --- | --- | --- | --- |
-| `sirius-coding/sirius-coding` | public | `null` before this local license update is pushed | Push root `LICENSE` so GitHub detects Apache-2.0 |
-| `sirius-coding/sirius-xz-agent` | public | `null` | Publish project `LICENSE` and README alignment when syncing the independent repo |
-| `sirius-coding/sirius-xz-agent-ui` | public | `null` | Publish project `LICENSE` and README alignment when syncing the independent repo |
-| `sirius-coding/sirius-cloud-starter` | public | `null` | Publish project `LICENSE` and README alignment when syncing the independent repo |
-| `sirius-coding/sirius-web-toolkit` | public | `null` | Publish project `LICENSE` and README alignment when syncing the independent repo |
+| `<owner>/<repo>` | public or private | expected SPDX license metadata | Publish project `LICENSE`, README alignment, CI, and public-safe docs |
 
 ## Synchronization Rule
 

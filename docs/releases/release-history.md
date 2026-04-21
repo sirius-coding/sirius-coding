@@ -19,6 +19,7 @@ This workspace treats major versions as reusable station capability milestones. 
 | `v2.0.0` | Public and template readiness: license, brand boundary, independent repo alignment, module roadmap. |
 | `v3.0.0` | Template-ready evolution station: high-quality diagram pipeline, SemVer history, template sync, and GitHub Project roadmap. |
 | `v4.0.0` | Control Layer OS product baseline: adoption docs, community files, strict audits, and PR-based mother-to-template sync. |
+| `v4.0.1` | Template decoupling patch: explicit repository roles, adopted-template audit mode, and mother-only project inventory exclusion. |
 
 ## Template Release Rule
 

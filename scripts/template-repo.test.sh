@@ -42,12 +42,30 @@ done
 for forbidden in \
   projects \
   pom.xml \
-  docs/sirius-xz-agent-cloud-deploy-checklist.md \
-  docs/superpowers; do
+  docs/mother \
+  docs/superpowers \
+  .github/workflows/sync-template.yml \
+  .github/java-upgrade \
+  docs/.DS_Store; do
   if [[ -e "${snapshot}/${forbidden}" ]]; then
     echo "Template snapshot must not contain ${forbidden}" >&2
     exit 1
   fi
+done
+
+for forbidden_text in \
+  "projects/"'sirius-' \
+  "sirius-xz-"'agent' \
+  "sirius-xz-"'agent-ui' \
+  "sirius-cloud-"'starter' \
+  "sirius-web-"'toolkit'; do
+  if grep -RInI --exclude-dir=.git "${forbidden_text}" "${snapshot}" >/tmp/sirius-template-forbidden-text.$$ 2>/dev/null; then
+    cat /tmp/sirius-template-forbidden-text.$$ >&2
+    rm -f /tmp/sirius-template-forbidden-text.$$
+    echo "Template snapshot must not contain mother repository text: ${forbidden_text}" >&2
+    exit 1
+  fi
+  rm -f /tmp/sirius-template-forbidden-text.$$
 done
 
 grep -q "Sirius Evolution Station Template" "${snapshot}/README.md"
@@ -78,6 +96,27 @@ fi
 if [[ "${leaky_output}" != *"forbidden path exists: projects"* ]]; then
   echo "Expected template audit to report projects/ leak" >&2
   echo "${leaky_output}" >&2
+  exit 1
+fi
+
+adopter="${TMP_ROOT}/adopter"
+cp -R "${snapshot}" "${adopter}"
+mkdir -p "${adopter}/projects/fruits-card"
+cat > "${adopter}/projects/fruits-card/README.md" <<'EOF'
+# Fruits Card
+
+## Workspace alignment
+
+This project adopts the reusable workspace rules.
+EOF
+cat > "${adopter}/projects/fruits-card/LICENSE" <<'EOF'
+Apache License fixture
+EOF
+
+adopter_output="$(bash "${ROOT_DIR}/scripts/root-repo-structure-audit.sh" "${adopter}" --strict)"
+if [[ "${adopter_output}" != *"Audit profile: adopter"* ]] || [[ "${adopter_output}" != *"Audit passed"* ]]; then
+  echo "Expected adopted template with a user project to pass as adopter" >&2
+  echo "${adopter_output}" >&2
   exit 1
 fi
 

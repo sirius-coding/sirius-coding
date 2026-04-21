@@ -4,14 +4,15 @@ set -euo pipefail
 ROOT="."
 STRICT=false
 JSON_OUTPUT=false
+PROFILE=""
 failures=()
 passes=()
 
 usage() {
   cat <<'EOF'
-Usage: scripts/root-repo-structure-audit.sh [root] [--strict] [--json]
+Usage: scripts/root-repo-structure-audit.sh [root] [--strict] [--json] [--profile mother|template-release|adopter]
 
-Audits the Sirius root workspace or template snapshot.
+Audits the Sirius mother workspace, template snapshot, or adopted template workspace.
 EOF
 }
 
@@ -24,6 +25,10 @@ while [[ "$#" -gt 0 ]]; do
     --json)
       JSON_OUTPUT=true
       shift
+      ;;
+    --profile)
+      PROFILE="${2:-}"
+      shift 2
       ;;
     -h|--help)
       usage
@@ -38,10 +43,70 @@ done
 
 ROOT="$(cd "${ROOT}" && pwd -P)"
 
-if [[ -d "${ROOT}/projects" ]]; then
-  PROFILE="root"
+normalize_profile() {
+  case "$1" in
+    root|mother)
+      printf '%s\n' "mother"
+      ;;
+    template|template-release)
+      printf '%s\n' "template-release"
+      ;;
+    adopter)
+      printf '%s\n' "adopter"
+      ;;
+    *)
+      echo "Unknown audit profile: $1" >&2
+      exit 2
+      ;;
+  esac
+}
+
+read_repository_role() {
+  local role_file="${ROOT}/docs/template/repository-role.yaml"
+  [[ -f "${role_file}" ]] || return 0
+
+  awk -F: '
+    /^[[:space:]]*role[[:space:]]*:/ {
+      value=$2
+      gsub(/[[:space:]"]/, "", value)
+      print value
+      exit
+    }
+  ' "${role_file}"
+}
+
+detect_profile() {
+  local role
+  role="$(read_repository_role)"
+
+  case "${role}" in
+    mother|root)
+      printf '%s\n' "mother"
+      return 0
+      ;;
+    template)
+      if [[ -d "${ROOT}/projects" ]]; then
+        printf '%s\n' "adopter"
+      else
+        printf '%s\n' "template-release"
+      fi
+      return 0
+      ;;
+  esac
+
+  if [[ -f "${ROOT}/.github/workflows/sync-template.yml" ]]; then
+    printf '%s\n' "mother"
+  elif [[ -d "${ROOT}/projects" ]]; then
+    printf '%s\n' "adopter"
+  else
+    printf '%s\n' "template-release"
+  fi
+}
+
+if [[ -n "${PROFILE}" ]]; then
+  PROFILE="$(normalize_profile "${PROFILE}")"
 else
-  PROFILE="template"
+  PROFILE="$(detect_profile)"
 fi
 
 record_pass() {
@@ -101,6 +166,7 @@ check_required_paths() {
     "docs/ops/environment-registry.private.example.yaml"
     "docs/releases/release-history.md"
     "docs/template/template-manifest.yaml"
+    "docs/template/repository-role.yaml"
     "scripts"
     "scripts/diagram/build-all.mjs"
     "scripts/diagram/build-intent.mjs"
@@ -150,24 +216,35 @@ check_required_paths() {
     "specs/workspace/control-layer-os.md"
   )
 
-  local root_paths=("projects")
-  local root_strict_paths=(".github/workflows/sync-template.yml")
+  local mother_paths=(
+    "projects"
+    "docs/mother/project-inventory.yaml"
+  )
+  local mother_strict_paths=(".github/workflows/sync-template.yml")
+  local template_forbidden_paths=(
+    "pom.xml"
+    ".github/workflows/sync-template.yml"
+    "docs/mother"
+    "docs/superpowers"
+    "docs/ops/environment-registry.private.yaml"
+  )
 
   for path in "${common_paths[@]}"; do
     require_path "${path}"
   done
 
-  if [[ "${PROFILE}" == "root" ]]; then
-    for path in "${root_paths[@]}"; do
+  if [[ "${PROFILE}" == "mother" ]]; then
+    for path in "${mother_paths[@]}"; do
       require_path "${path}"
     done
   else
-    forbid_path "projects"
-    forbid_path "pom.xml"
-    forbid_path ".github/workflows/sync-template.yml"
-    forbid_path "docs/sirius-xz-agent-cloud-deploy-checklist.md"
-    forbid_path "docs/superpowers"
-    forbid_path "docs/ops/environment-registry.private.yaml"
+    if [[ "${PROFILE}" == "template-release" ]]; then
+      forbid_path "projects"
+    fi
+
+    for path in "${template_forbidden_paths[@]}"; do
+      forbid_path "${path}"
+    done
   fi
 
   if [[ "${STRICT}" == true ]]; then
@@ -175,8 +252,8 @@ check_required_paths() {
       require_path "${path}"
     done
 
-    if [[ "${PROFILE}" == "root" ]]; then
-      for path in "${root_strict_paths[@]}"; do
+    if [[ "${PROFILE}" == "mother" ]]; then
+      for path in "${mother_strict_paths[@]}"; do
         require_path "${path}"
       done
     fi
@@ -224,13 +301,14 @@ check_yaml() {
     "docs/ops/environment-registry.yaml"
     "docs/ops/environment-registry.private.example.yaml"
     "docs/template/template-manifest.yaml"
+    "docs/template/repository-role.yaml"
   )
 
   if [[ "${STRICT}" == true ]]; then
     files+=(
       ".github/workflows/root-audit.yml"
     )
-    if [[ "${PROFILE}" == "root" ]]; then
+    if [[ "${PROFILE}" == "mother" ]]; then
       files+=(".github/workflows/sync-template.yml")
     fi
   fi
@@ -389,20 +467,45 @@ PY
   fi
 }
 
-check_project_alignment_sections() {
-  if [[ "${PROFILE}" != "root" ]]; then
+collect_project_paths() {
+  if [[ "${PROFILE}" == "mother" && -f "${ROOT}/docs/mother/project-inventory.yaml" ]]; then
+    if command -v ruby >/dev/null 2>&1; then
+      ruby -ryaml -e '
+        data = YAML.load_file(ARGV.fetch(0)) || {}
+        Array(data["projects"]).each do |project|
+          path = project.fetch("path", nil)
+          puts path if path
+        end
+      ' "${ROOT}/docs/mother/project-inventory.yaml"
+    else
+      awk -F: '
+        /^[[:space:]]*path[[:space:]]*:/ {
+          value=$2
+          gsub(/^[[:space:]"]+|[[:space:]"]+$/, "", value)
+          print value
+        }
+      ' "${ROOT}/docs/mother/project-inventory.yaml"
+    fi
     return 0
   fi
 
-  local projects=(
-    "projects/sirius-xz-agent/README.md"
-    "projects/sirius-xz-agent-ui/README.md"
-    "projects/sirius-cloud-starter/README.md"
-    "projects/sirius-web-toolkit/README.md"
-  )
+  if [[ -d "${ROOT}/projects" ]]; then
+    find "${ROOT}/projects" -mindepth 1 -maxdepth 1 -type d -print \
+      | sed "s#^${ROOT}/##" \
+      | sort
+  fi
+}
 
-  local rel
-  for rel in "${projects[@]}"; do
+check_project_alignment_sections() {
+  if [[ "${PROFILE}" == "template-release" ]]; then
+    return 0
+  fi
+
+  local project
+  while IFS= read -r project; do
+    [[ -n "${project}" ]] || continue
+    local rel="${project}/README.md"
+
     if [[ ! -f "${ROOT}/${rel}" ]]; then
       record_fail "missing project README: ${rel}"
       continue
@@ -413,40 +516,35 @@ check_project_alignment_sections() {
     else
       record_fail "missing workspace alignment section: ${rel}"
     fi
-  done
+  done < <(collect_project_paths)
 }
 
 check_project_licenses() {
-  if [[ "${PROFILE}" != "root" ]]; then
+  if [[ "${PROFILE}" == "template-release" ]]; then
     return 0
   fi
 
-  local licenses=(
-    "projects/sirius-xz-agent/LICENSE"
-    "projects/sirius-xz-agent-ui/LICENSE"
-    "projects/sirius-cloud-starter/LICENSE"
-    "projects/sirius-web-toolkit/LICENSE"
-  )
+  local project
+  while IFS= read -r project; do
+    [[ -n "${project}" ]] || continue
+    local rel="${project}/LICENSE"
 
-  local rel
-  for rel in "${licenses[@]}"; do
     if [[ -f "${ROOT}/${rel}" ]]; then
       record_pass "project license exists: ${rel}"
     else
       record_fail "missing project license: ${rel}"
     fi
-  done
+  done < <(collect_project_paths)
 }
 
 scan_sensitive_patterns() {
   local ip_pattern="223\\.109\\.140\\.60"
   local ssh_alias_pattern="sirius-cloud"'-root'
-  local remote_root_pattern="/root/"'sirius-xz-agent-it'
   local workspace_path_pattern="${HOME}/Code/tests"
   local root_user_pattern='user: "'root'"'
   local root_at_pattern='root''@'
   local private_key_pattern='BEGIN (RSA |OPENSSH |EC )?PRIVATE KEY'
-  local pattern="${ip_pattern}|${ssh_alias_pattern}|${remote_root_pattern}|${workspace_path_pattern}|${root_user_pattern}|${root_at_pattern}|${private_key_pattern}"
+  local pattern="${ip_pattern}|${ssh_alias_pattern}|${workspace_path_pattern}|${root_user_pattern}|${root_at_pattern}|${private_key_pattern}"
   local output
 
   set +e
