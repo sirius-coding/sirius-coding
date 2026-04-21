@@ -36,6 +36,7 @@
 | `docs/ops/workspace-opening-model.md` | workspace 打开模型，定义项目暴露模式、目录契约和发布最小资产。 | Workspace opening model defining exposure modes, directory contract, and minimum release assets. |
 | `docs/ops/environment-registry.yaml` | 公开环境登记模型，只保留可公开占位与抽象拓扑。 | Public environment registry model containing placeholders and abstract topology only. |
 | `docs/ops/environment-registry.private.example.yaml` | 私有环境登记示例，复制成本地私有文件后填真实值。 | Example private registry; copy locally and fill with real values outside git. |
+| `docs/diagrams/` | 图形能力目录，以 JSON 结构源生成 Mermaid、draw.io、Excalidraw 和 AI Drawio 提示词。 | Diagram capability directory generating Mermaid, draw.io, Excalidraw, and AI Drawio prompts from JSON structure sources. |
 | `docs/sirius-xz-agent-cloud-deploy-checklist.md` | `sirius-xz-agent` 云端发布、联调、烟测和排障清单。 | Cloud deploy, integration, smoke-test, and triage checklist for `sirius-xz-agent`. |
 | `docs/superpowers/specs/` | 历史设计规格，用于记录已完成或计划中的设计决策。 | Historical design specs recording completed or planned design decisions. |
 | `docs/superpowers/plans/` | 历史实施计划，用于记录可复现的任务拆分和执行路径。 | Historical implementation plans recording reproducible task breakdowns and execution paths. |
@@ -47,6 +48,8 @@
 | `skills/workspace-multi-env-delivery/SKILL.md` | 多环境交付 skill，覆盖项目暴露模式、环境登记、发布清单和证据采集。 | Multi-environment delivery skill covering exposure modes, environment registration, release checklist, and evidence capture. |
 | `scripts/root-repo-structure-audit.sh` | 根仓库结构与脱敏审计脚本。 | Root repository structure and sanitization audit script. |
 | `scripts/root-repo-structure-audit.test.sh` | 审计脚本的 shell 测试，覆盖通过路径和敏感值失败路径。 | Shell test for the audit script, covering clean and sensitive-data failure paths. |
+| `scripts/generate-diagrams.mjs` | 图形生成器，将 `*.diagram.json` 转换为 Mermaid、draw.io、Excalidraw 和 AI Drawio 提示词。 | Diagram generator converting `*.diagram.json` into Mermaid, draw.io, Excalidraw, and AI Drawio prompts. |
+| `scripts/generate-diagrams.test.sh` | 图形生成器测试，验证生成物存在并检测陈旧输出。 | Diagram generator test verifying generated files and stale-output detection. |
 | `scripts/dev-env-check.sh` | 本地开发环境检查脚本。 | Local development environment check script. |
 
 ## 项目执行层 / Project Execution Layer

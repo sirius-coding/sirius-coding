@@ -33,11 +33,19 @@ check_required_paths() {
     "AGENTS.md"
     ".codex/config.toml"
     "docs"
+    "docs/diagrams/README.md"
+    "docs/diagrams/evolution-workflow.diagram.json"
+    "docs/diagrams/evolution-workflow.mmd"
+    "docs/diagrams/evolution-workflow.drawio"
+    "docs/diagrams/evolution-workflow.excalidraw"
+    "docs/diagrams/evolution-workflow.ai-drawio.md"
     "docs/ops/workspace-opening-model.md"
     "docs/ops/environment-registry.yaml"
     "docs/ops/environment-registry.private.example.yaml"
     "projects"
     "scripts"
+    "scripts/generate-diagrams.mjs"
+    "scripts/generate-diagrams.test.sh"
     "scripts/root-repo-structure-audit.sh"
     "scripts/root-repo-structure-audit.test.sh"
     "skills"
@@ -126,6 +134,45 @@ PY
     fi
   else
     echo "WARN: python3 not found; skipped TOML parsing"
+  fi
+}
+
+check_diagram_assets() {
+  local spec="docs/diagrams/evolution-workflow.diagram.json"
+  local generator="scripts/generate-diagrams.mjs"
+
+  [[ -f "${ROOT}/${spec}" ]] || return
+
+  if command -v python3 >/dev/null 2>&1; then
+    if python3 - "${ROOT}/${spec}" <<'PY'
+import json
+import sys
+
+with open(sys.argv[1], "r", encoding="utf-8") as fh:
+    data = json.load(fh)
+
+required = ("id", "title", "layers", "nodes", "edges")
+missing = [key for key in required if key not in data]
+if missing:
+    raise SystemExit(f"missing diagram keys: {', '.join(missing)}")
+PY
+    then
+      pass "diagram JSON parses: ${spec}"
+    else
+      fail "diagram JSON does not parse: ${spec}"
+    fi
+  else
+    echo "WARN: python3 not found; skipped diagram JSON parsing"
+  fi
+
+  if [[ -f "${ROOT}/${generator}" ]] && command -v node >/dev/null 2>&1; then
+    if node "${ROOT}/${generator}" --check "${ROOT}/${spec}" >/dev/null 2>&1; then
+      pass "diagram generated outputs are current"
+    else
+      fail "diagram generated outputs are stale"
+    fi
+  else
+    echo "WARN: node or diagram generator not found; skipped diagram drift check"
   fi
 }
 
@@ -256,6 +303,7 @@ main() {
   check_skill_frontmatter
   check_yaml
   check_toml
+  check_diagram_assets
   check_readme_links
   check_project_alignment_sections
   check_project_licenses

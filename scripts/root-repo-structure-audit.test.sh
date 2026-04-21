@@ -12,6 +12,7 @@ create_clean_fixture() {
 
   mkdir -p \
     "${root}/.codex" \
+    "${root}/docs/diagrams" \
     "${root}/docs/ops" \
     "${root}/assets" \
     "${root}/skills/workspace-multi-env-delivery" \
@@ -55,6 +56,24 @@ EOF
   cat > "${root}/docs/ops/workspace-opening-model.md" <<'EOF'
 # Workspace Opening Model
 EOF
+
+  cat > "${root}/docs/diagrams/README.md" <<'EOF'
+# Diagram Capability
+EOF
+
+  cat > "${root}/docs/diagrams/evolution-workflow.diagram.json" <<'EOF'
+{
+  "id": "evolution-workflow",
+  "title": "Evolution Workflow",
+  "layers": [{"id": "a", "title": "A"}],
+  "nodes": [{"id": "n", "label": "Node", "layer": "a"}],
+  "edges": []
+}
+EOF
+
+  for generated in mmd drawio excalidraw ai-drawio.md; do
+    echo "fixture" > "${root}/docs/diagrams/evolution-workflow.${generated}"
+  done
 
   cat > "${root}/docs/ops/environment-registry.yaml" <<'EOF'
 version: 1
@@ -125,6 +144,16 @@ echo fixture
 EOF
 
   cat > "${root}/scripts/root-repo-structure-audit.test.sh" <<'EOF'
+#!/usr/bin/env bash
+echo fixture
+EOF
+
+  cat > "${root}/scripts/generate-diagrams.mjs" <<'EOF'
+#!/usr/bin/env node
+process.exit(0);
+EOF
+
+  cat > "${root}/scripts/generate-diagrams.test.sh" <<'EOF'
 #!/usr/bin/env bash
 echo fixture
 EOF

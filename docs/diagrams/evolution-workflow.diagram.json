@@ -1,0 +1,210 @@
+{
+  "id": "evolution-workflow",
+  "title": "Sirius Coding Evolution Workflow",
+  "description": "The workflow that turns human and AI development conversations into durable workspace memory, rules, skills, scripts, diagrams, and project outputs.",
+  "direction": "LR",
+  "readmeSync": {
+    "path": "README.md",
+    "marker": "evolution-workflow"
+  },
+  "layers": [
+    {
+      "id": "conversation",
+      "title": "1. 对话输入 / Conversation"
+    },
+    {
+      "id": "execution",
+      "title": "2. 构建验证 / Build"
+    },
+    {
+      "id": "evolution",
+      "title": "3. 进化复盘 / Evolution"
+    },
+    {
+      "id": "assets",
+      "title": "4. 长期资产 / Assets"
+    },
+    {
+      "id": "publication",
+      "title": "5. 公开工作站 / Station"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "human-ai-dialogue",
+      "label": "人与 AI 对话\\n目标, 约束, 决策",
+      "kind": "input",
+      "layer": "conversation"
+    },
+    {
+      "id": "repo-context-scan",
+      "label": "读取仓库事实\\nREADME, AGENTS, docs, projects",
+      "kind": "process",
+      "layer": "conversation"
+    },
+    {
+      "id": "implementation-loop",
+      "label": "执行改造\\n代码, 文档, 脚本, 图表",
+      "kind": "process",
+      "layer": "execution"
+    },
+    {
+      "id": "verification-evidence",
+      "label": "收集证据\\n测试, 审计, 构建, 烟测",
+      "kind": "process",
+      "layer": "execution"
+    },
+    {
+      "id": "evolution-question",
+      "label": "进化问题\\n什么需要长期保存?",
+      "kind": "decision",
+      "layer": "evolution"
+    },
+    {
+      "id": "knowledge-routing",
+      "label": "知识分流\\n规则, skill, 脚本, 文档, 项目",
+      "kind": "process",
+      "layer": "evolution"
+    },
+    {
+      "id": "workspace-rules",
+      "label": "specs/ + AGENTS.md\\n目标, 边界, 运行规则",
+      "kind": "asset",
+      "layer": "assets"
+    },
+    {
+      "id": "reusable-skills",
+      "label": "skills/\\n可复用协作流程",
+      "kind": "asset",
+      "layer": "assets"
+    },
+    {
+      "id": "automation-scripts",
+      "label": "scripts/\\n审计, 生成器, 检查",
+      "kind": "asset",
+      "layer": "assets"
+    },
+    {
+      "id": "docs-diagrams",
+      "label": "docs/ + diagrams\\n运行手册, 环境模型, 流程图",
+      "kind": "asset",
+      "layer": "assets"
+    },
+    {
+      "id": "project-outputs",
+      "label": "projects/\\n实现, 测试, 部署资产",
+      "kind": "asset",
+      "layer": "assets"
+    },
+    {
+      "id": "public-guardrail",
+      "label": "公开/私有护栏\\n发布前脱敏",
+      "kind": "process",
+      "layer": "publication"
+    },
+    {
+      "id": "homepage-readme",
+      "label": "主页 README\\n公开入口与导航",
+      "kind": "output",
+      "layer": "publication"
+    },
+    {
+      "id": "next-session",
+      "label": "下一次会话更强\\nVibe coding 进化为资产",
+      "kind": "output",
+      "layer": "publication"
+    }
+  ],
+  "edges": [
+    {
+      "from": "human-ai-dialogue",
+      "to": "repo-context-scan",
+      "label": "锚定需求"
+    },
+    {
+      "from": "repo-context-scan",
+      "to": "implementation-loop",
+      "label": "选择边界"
+    },
+    {
+      "from": "implementation-loop",
+      "to": "verification-evidence",
+      "label": "证明行为"
+    },
+    {
+      "from": "verification-evidence",
+      "to": "evolution-question",
+      "label": "复盘结果"
+    },
+    {
+      "from": "evolution-question",
+      "to": "knowledge-routing",
+      "label": "沉淀长期经验"
+    },
+    {
+      "from": "knowledge-routing",
+      "to": "workspace-rules",
+      "label": "规则"
+    },
+    {
+      "from": "knowledge-routing",
+      "to": "reusable-skills",
+      "label": "重复流程"
+    },
+    {
+      "from": "knowledge-routing",
+      "to": "automation-scripts",
+      "label": "检查或生成"
+    },
+    {
+      "from": "knowledge-routing",
+      "to": "docs-diagrams",
+      "label": "模型或图"
+    },
+    {
+      "from": "knowledge-routing",
+      "to": "project-outputs",
+      "label": "实现"
+    },
+    {
+      "from": "workspace-rules",
+      "to": "public-guardrail",
+      "label": "审计"
+    },
+    {
+      "from": "reusable-skills",
+      "to": "public-guardrail",
+      "label": "审计"
+    },
+    {
+      "from": "automation-scripts",
+      "to": "public-guardrail",
+      "label": "审计"
+    },
+    {
+      "from": "docs-diagrams",
+      "to": "public-guardrail",
+      "label": "审计"
+    },
+    {
+      "from": "project-outputs",
+      "to": "public-guardrail",
+      "label": "审计"
+    },
+    {
+      "from": "public-guardrail",
+      "to": "homepage-readme",
+      "label": "公开展示"
+    },
+    {
+      "from": "homepage-readme",
+      "to": "next-session",
+      "label": "强记忆"
+    },
+    {
+      "from": "next-session",
+      "to": "human-ai-dialogue",
+      "label": "反馈循环"
+    }
+  ]
+}

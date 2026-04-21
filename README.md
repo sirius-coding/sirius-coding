@@ -18,6 +18,7 @@
 <p align="center">
   <a href="#核心定位">核心定位</a> ·
   <a href="#进化闭环">进化闭环</a> ·
+  <a href="#进化流程图">进化流程图</a> ·
   <a href="#核心资产">核心资产</a> ·
   <a href="#项目执行层">项目执行层</a> ·
   <a href="#安全边界">安全边界</a> ·
@@ -46,6 +47,61 @@ This repository is not only a GitHub profile README and not only a project colle
 4. **主动验证**：用测试、构建、静态扫描和烟测证据支撑结论。
 5. **主动复盘**：每次任务输出 `Evolution`，判断哪些经验应继续沉淀。
 
+## 进化流程图
+
+这张图描述的是工作站的进化能力：一次开发对话不会只停留在聊天窗口，而会经过实现、验证、复盘和知识分流，最终沉淀成规则、skill、脚本、文档、图表和项目资产。
+
+<!-- diagram:evolution-workflow:start -->
+```mermaid
+flowchart LR
+  %% Sirius Coding Evolution Workflow
+  subgraph conversation["1. 对话输入 / Conversation"]
+    human_ai_dialogue(["人与 AI 对话<br/>目标, 约束, 决策"])
+    repo_context_scan["读取仓库事实<br/>README, AGENTS, docs, projects"]
+  end
+  subgraph execution["2. 构建验证 / Build"]
+    implementation_loop["执行改造<br/>代码, 文档, 脚本, 图表"]
+    verification_evidence["收集证据<br/>测试, 审计, 构建, 烟测"]
+  end
+  subgraph evolution["3. 进化复盘 / Evolution"]
+    evolution_question{"进化问题<br/>什么需要长期保存?"}
+    knowledge_routing["知识分流<br/>规则, skill, 脚本, 文档, 项目"]
+  end
+  subgraph assets["4. 长期资产 / Assets"]
+    workspace_rules[["specs/ + AGENTS.md<br/>目标, 边界, 运行规则"]]
+    reusable_skills[["skills/<br/>可复用协作流程"]]
+    automation_scripts[["scripts/<br/>审计, 生成器, 检查"]]
+    docs_diagrams[["docs/ + diagrams<br/>运行手册, 环境模型, 流程图"]]
+    project_outputs[["projects/<br/>实现, 测试, 部署资产"]]
+  end
+  subgraph publication["5. 公开工作站 / Station"]
+    public_guardrail["公开/私有护栏<br/>发布前脱敏"]
+    homepage_readme(["主页 README<br/>公开入口与导航"])
+    next_session(["下一次会话更强<br/>Vibe coding 进化为资产"])
+  end
+  human_ai_dialogue -->|"锚定需求"| repo_context_scan
+  repo_context_scan -->|"选择边界"| implementation_loop
+  implementation_loop -->|"证明行为"| verification_evidence
+  verification_evidence -->|"复盘结果"| evolution_question
+  evolution_question -->|"沉淀长期经验"| knowledge_routing
+  knowledge_routing -->|"规则"| workspace_rules
+  knowledge_routing -->|"重复流程"| reusable_skills
+  knowledge_routing -->|"检查或生成"| automation_scripts
+  knowledge_routing -->|"模型或图"| docs_diagrams
+  knowledge_routing -->|"实现"| project_outputs
+  workspace_rules -->|"审计"| public_guardrail
+  reusable_skills -->|"审计"| public_guardrail
+  automation_scripts -->|"审计"| public_guardrail
+  docs_diagrams -->|"审计"| public_guardrail
+  project_outputs -->|"审计"| public_guardrail
+  public_guardrail -->|"公开展示"| homepage_readme
+  homepage_readme -->|"强记忆"| next_session
+  next_session -->|"反馈循环"| human_ai_dialogue
+```
+<!-- diagram:evolution-workflow:end -->
+
+可编辑草图版本保存在 [draw.io](./docs/diagrams/evolution-workflow.drawio) 和 [Excalidraw](./docs/diagrams/evolution-workflow.excalidraw) 中。
+
 ## 核心资产
 
 | 资产 / Asset | 说明 / Description |
@@ -61,6 +117,7 @@ This repository is not only a GitHub profile README and not only a project colle
 | [Cloud Deploy Checklist](./docs/sirius-xz-agent-cloud-deploy-checklist.md) | 云端发布与联调检查清单 |
 | [Reusable Delivery Skill](./skills/workspace-multi-env-delivery/SKILL.md) | 多环境交付、独立仓库发布和部署排障复用流程 |
 | [Root Repo Audit Script](./scripts/root-repo-structure-audit.sh) | 根仓库结构和公开脱敏检查脚本 |
+| [Diagram Capability](./docs/diagrams/README.md) | JSON -> Mermaid / draw.io / Excalidraw / AI Drawio 的结构化画图链路 |
 | [Independent Repo Alignment](./specs/workspace/independent-repo-alignment.md) | 独立仓库与根工作站目标对齐标准 |
 | [Module Roadmap](./specs/workspace/module-roadmap.md) | 根模块和子项目模块的持续完善路线 |
 
