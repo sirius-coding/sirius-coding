@@ -12,11 +12,16 @@ create_clean_fixture() {
 
   mkdir -p \
     "${root}/.codex" \
+    "${root}/.github/ISSUE_TEMPLATE" \
+    "${root}/.github/workflows" \
+    "${root}/docs/adoption" \
     "${root}/docs/diagrams" \
     "${root}/docs/ops" \
     "${root}/docs/releases" \
     "${root}/docs/template" \
+    "${root}/examples/minimal-project-layout" \
     "${root}/assets" \
+    "${root}/skills/template-adoption" \
     "${root}/skills/workspace-multi-env-delivery" \
     "${root}/specs/review" \
     "${root}/specs/workspace" \
@@ -28,6 +33,12 @@ create_clean_fixture() {
 # Fixture
 
 - [Agent Rules](./AGENTS.md)
+- [Contributing](./CONTRIBUTING.md)
+- [Security](./SECURITY.md)
+- [Quick Start](./docs/adoption/quick-start.md)
+- [Why This Template](./docs/adoption/why-this-template.md)
+- [Mother Repo Relationship](./docs/adoption/mother-repo-relationship.md)
+- [Minimal Project Layout](./examples/minimal-project-layout/README.md)
 - [Opening Model](./docs/ops/workspace-opening-model.md)
 EOF
 
@@ -36,15 +47,23 @@ Apache License fixture
 EOF
 
   cat > "${root}/VERSION" <<'EOF'
-3.0.0
+4.0.0
 EOF
 
   cat > "${root}/CHANGELOG.md" <<'EOF'
 # Changelog
 
-## [3.0.0] - 2026-04-21
+## [4.0.0] - 2026-04-21
 
 - Fixture release.
+EOF
+
+  cat > "${root}/CONTRIBUTING.md" <<'EOF'
+# Contributing
+EOF
+
+  cat > "${root}/SECURITY.md" <<'EOF'
+# Security
 EOF
 
   cat > "${root}/NOTICE" <<'EOF'
@@ -66,6 +85,44 @@ EOF
   cat > "${root}/.codex/config.toml" <<'EOF'
 [features]
 multi_agent = true
+EOF
+
+  cat > "${root}/.github/workflows/root-audit.yml" <<'EOF'
+name: Root Audit
+on: [push, pull_request]
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./scripts/root-repo-structure-audit.sh --strict
+EOF
+
+  cat > "${root}/.github/workflows/sync-template.yml" <<'EOF'
+name: Sync Template
+on:
+  workflow_dispatch:
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./scripts/template/sync-template-repo.sh --pr
+EOF
+
+  for template in bug_report adoption_feedback reusable-capability-proposal; do
+    cat > "${root}/.github/ISSUE_TEMPLATE/${template}.md" <<'EOF'
+---
+name: Fixture template
+about: Fixture
+---
+EOF
+  done
+
+  cat > "${root}/.github/pull_request_template.md" <<'EOF'
+## Why
+
+## Validation
 EOF
 
   cat > "${root}/docs/ops/workspace-opening-model.md" <<'EOF'
@@ -121,14 +178,50 @@ EOF
   cat > "${root}/docs/releases/release-history.md" <<'EOF'
 # Release History
 
-Current version: 3.0.0
+Current version: 4.0.0
 EOF
 
   cat > "${root}/docs/template/template-manifest.yaml" <<'EOF'
 version: 1
-current_version: "3.0.0"
-include_paths: []
-exclude_paths: []
+current_version: "4.0.0"
+include:
+  root_files:
+    - "README.md"
+    - "CONTRIBUTING.md"
+    - "SECURITY.md"
+  directories:
+    - ".github"
+    - "docs"
+    - "examples"
+exclude:
+  paths:
+    - "projects"
+EOF
+
+  cat > "${root}/docs/adoption/quick-start.md" <<'EOF'
+# Quick Start
+EOF
+
+  cat > "${root}/docs/adoption/why-this-template.md" <<'EOF'
+# Why This Template
+EOF
+
+  cat > "${root}/docs/adoption/mother-repo-relationship.md" <<'EOF'
+# Mother Repo Relationship
+EOF
+
+  cat > "${root}/examples/minimal-project-layout/README.md" <<'EOF'
+# Minimal Project Layout
+EOF
+
+  cat > "${root}/examples/minimal-project-layout/tree.txt" <<'EOF'
+.
+|-- AGENTS.md
+`-- projects/
+EOF
+
+  cat > "${root}/examples/minimal-project-layout/evolution-sample.md" <<'EOF'
+# Evolution Sample
 EOF
 
   cat > "${root}/skills/workspace-multi-env-delivery/SKILL.md" <<'EOF'
@@ -138,6 +231,15 @@ description: Test fixture skill.
 ---
 
 # Skill
+EOF
+
+  cat > "${root}/skills/template-adoption/SKILL.md" <<'EOF'
+---
+name: template-adoption
+description: Use when helping someone adopt the Sirius Evolution Station template.
+---
+
+# Template Adoption
 EOF
 
   cat > "${root}/specs/review/code_review.md" <<'EOF'
@@ -150,6 +252,10 @@ EOF
 
   cat > "${root}/specs/workspace/public-private-boundary.md" <<'EOF'
 # Public and Private Knowledge Boundary
+EOF
+
+  cat > "${root}/specs/workspace/control-layer-os.md" <<'EOF'
+# Control Layer OS
 EOF
 
   cat > "${root}/specs/workspace/evolution-handbook.md" <<'EOF'
@@ -273,6 +379,31 @@ create_clean_fixture "${clean_fixture}"
 clean_output="$("${SCRIPT}" "${clean_fixture}")"
 assert_contains "${clean_output}" "Audit passed"
 
+strict_output="$("${SCRIPT}" "${clean_fixture}" --strict)"
+assert_contains "${strict_output}" "Audit profile: root"
+assert_contains "${strict_output}" "Audit passed"
+
+json_output="$("${SCRIPT}" "${clean_fixture}" --strict --json)"
+python3 - "${json_output}" <<'PY'
+import json
+import sys
+
+data = json.loads(sys.argv[1])
+assert data["status"] == "passed", data
+assert data["profile"] == "root", data
+assert data["strict"] is True, data
+assert data["failures"] == [], data
+PY
+
+template_fixture="${TMP_ROOT}/template"
+cp -R "${clean_fixture}" "${template_fixture}"
+rm -rf "${template_fixture}/projects"
+rm -f "${template_fixture}/.github/workflows/sync-template.yml"
+
+template_output="$("${SCRIPT}" "${template_fixture}" --strict)"
+assert_contains "${template_output}" "Audit profile: template"
+assert_contains "${template_output}" "Audit passed"
+
 sensitive_fixture="${TMP_ROOT}/sensitive"
 create_clean_fixture "${sensitive_fixture}"
 ip_part_a="223"
@@ -324,5 +455,21 @@ if [[ "${missing_alignment_status}" -eq 0 ]]; then
 fi
 
 assert_contains "${missing_alignment_output}" "missing workspace alignment section"
+
+missing_adoption_fixture="${TMP_ROOT}/missing-adoption"
+create_clean_fixture "${missing_adoption_fixture}"
+rm "${missing_adoption_fixture}/docs/adoption/quick-start.md"
+
+set +e
+missing_adoption_output="$("${SCRIPT}" "${missing_adoption_fixture}" --strict 2>&1)"
+missing_adoption_status="$?"
+set -e
+
+if [[ "${missing_adoption_status}" -eq 0 ]]; then
+  echo "Expected missing adoption doc fixture to fail strict audit" >&2
+  exit 1
+fi
+
+assert_contains "${missing_adoption_output}" "missing required path: docs/adoption/quick-start.md"
 
 echo "root-repo-structure-audit tests passed"

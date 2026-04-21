@@ -1,0 +1,14 @@
+.
+|-- AGENTS.md
+|-- README.md
+|-- docs/
+|   |-- adoption/
+|   `-- ops/
+|-- skills/
+|-- specs/
+|   `-- workspace/
+|-- scripts/
+`-- projects/
+    `-- first-project/
+        |-- README.md
+        `-- src/

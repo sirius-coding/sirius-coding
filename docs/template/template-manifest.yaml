@@ -1,7 +1,7 @@
 version: 1
 template_repository: "sirius-coding/sirius-evolution-station-template"
 source_repository: "sirius-coding/sirius-coding"
-current_version: "3.0.0"
+current_version: "4.0.0"
 visibility: "public"
 
 include:
@@ -10,14 +10,18 @@ include:
     - "AGENTS.md"
     - "CHANGELOG.md"
     - "COMMERCIALIZATION.md"
+    - "CONTRIBUTING.md"
     - "LICENSE"
     - "NOTICE"
     - "README.md"
+    - "SECURITY.md"
     - "VERSION"
   directories:
     - ".codex"
+    - ".github"
     - "assets"
     - "docs"
+    - "examples"
     - "scripts"
     - "skills"
     - "specs"
@@ -26,6 +30,7 @@ exclude:
   paths:
     - "projects"
     - "pom.xml"
+    - ".github/workflows/sync-template.yml"
     - "docs/sirius-xz-agent-cloud-deploy-checklist.md"
     - "docs/superpowers"
     - "docs/ops/environment-registry.private.yaml"

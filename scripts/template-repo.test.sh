@@ -17,10 +17,20 @@ for required in \
   README.md \
   VERSION \
   CHANGELOG.md \
+  CONTRIBUTING.md \
+  SECURITY.md \
+  .github/workflows/root-audit.yml \
+  .github/pull_request_template.md \
+  docs/adoption/quick-start.md \
+  docs/adoption/why-this-template.md \
+  docs/adoption/mother-repo-relationship.md \
+  examples/minimal-project-layout/README.md \
   AGENTS.md \
   docs/releases/release-history.md \
   docs/template/template-manifest.yaml \
+  specs/workspace/control-layer-os.md \
   specs/diagram-style.md \
+  skills/template-adoption/SKILL.md \
   skills/diagram-pipeline/SKILL.md \
   scripts/diagram/build-all.mjs; do
   if [[ ! -e "${snapshot}/${required}" ]]; then
@@ -41,6 +51,14 @@ for forbidden in \
 done
 
 grep -q "Sirius Evolution Station Template" "${snapshot}/README.md"
+grep -q "Control Layer OS" "${snapshot}/README.md"
+
+sync_output="$(bash "${ROOT_DIR}/scripts/template/sync-template-repo.sh" --output "${TMP_ROOT}/summary-snapshot")"
+if [[ "${sync_output}" != *"Included paths:"* ]] || [[ "${sync_output}" != *"Excluded paths:"* ]] || [[ "${sync_output}" != *"Verification:"* ]]; then
+  echo "Expected sync output to include included/excluded/verification summary" >&2
+  echo "${sync_output}" >&2
+  exit 1
+fi
 
 leaky="${TMP_ROOT}/leaky-template"
 cp -R "${snapshot}" "${leaky}"

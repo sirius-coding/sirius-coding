@@ -1,0 +1,30 @@
+name: Sync Template
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout mother repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git identity
+        run: |
+          git config --global user.name "sirius-template-sync"
+          git config --global user.email "sirius-template-sync@users.noreply.github.com"
+
+      - name: Sync template by PR
+        env:
+          GH_TOKEN: ${{ secrets.SIRIUS_TEMPLATE_SYNC_TOKEN || secrets.GITHUB_TOKEN }}
+        run: ./scripts/template/sync-template-repo.sh --pr --remote https://github.com/sirius-coding/sirius-evolution-station-template.git

@@ -13,7 +13,7 @@ The root repository should prioritize shared documentation, reusable skills, env
 
 The complete workstation evolution handbook is persisted at `specs/workspace/evolution-handbook.md`. Treat that file as the durable source for the workspace's long-term operating model.
 
-The root control plane is versioned through `VERSION`, `CHANGELOG.md`, and `docs/releases/release-history.md`. Major reusable root upgrades are synchronized to the template repository using `scripts/template/sync-template-repo.sh`; business implementation under `projects/` must stay out of that template.
+The root control plane is versioned through `VERSION`, `CHANGELOG.md`, and `docs/releases/release-history.md`. Version 4 and later treat the repository as a Control Layer OS: reusable governance, memory, skills, audit, adoption, and sync assets around project implementation. Major reusable root upgrades are synchronized to the template repository using `scripts/template/sync-template-repo.sh --pr`; business implementation under `projects/` must stay out of that template.
 
 ## Fact Source Priority
 
@@ -35,6 +35,8 @@ Do not replace repository facts with chat-only explanations.
 - `.codex/`: Codex-local configuration only. Shared behavior belongs in this file or under `specs/`.
 
 Template sync is governed by `docs/template/template-manifest.yaml`. It may include shared rules, docs, skills, scripts, specs, and public assets, but must exclude `projects/`, root business build aggregation, private overlays, and project-specific deployment details.
+
+Productized template assets include `CONTRIBUTING.md`, `SECURITY.md`, `.github/`, `docs/adoption/`, `examples/`, and `skills/template-adoption/`. When these assets change, update README links, the template manifest, and `specs/workspace/core-assets-map.md`.
 
 ## Root vs Project Boundary
 
@@ -67,7 +69,7 @@ If real environment data is already coupled into public docs, prefer splitting i
 4. Make the smallest coherent, verifiable change.
 5. Add or update cross-links so new assets are discoverable.
 6. For root repository changes, run `./scripts/root-repo-structure-audit.sh` when available.
-7. Verify changed assets with formatting, parsing, build, test, or targeted smoke checks.
+7. Verify changed assets with formatting, parsing, build, test, or targeted smoke checks. For root/productized template changes, prefer `./scripts/root-repo-structure-audit.sh --strict`.
 8. End with an evolution note that says what should be documented, skilled, automated, or delegated to projects.
 
 ## Risk Gates

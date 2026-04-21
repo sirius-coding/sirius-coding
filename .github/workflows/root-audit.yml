@@ -1,0 +1,15 @@
+name: Root Audit
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run strict root audit
+        run: ./scripts/root-repo-structure-audit.sh --strict

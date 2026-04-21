@@ -16,6 +16,8 @@ Track what "continue improving all modules" means for the root evolution station
 | Brand system | `assets/hero.svg`, `NOTICE` | Extract a compact Sirius icon and brand usage guide |
 | Licensing | `LICENSE`, `NOTICE`, `COMMERCIALIZATION.md` | Add per-project license notices when publishing independent repos |
 | Audit automation | `scripts/root-repo-structure-audit.sh` | Run from GitHub Actions after the workflow layer is introduced |
+| Adoption | `docs/adoption/`, `examples/minimal-project-layout/`, `CONTRIBUTING.md`, `SECURITY.md` | Convert recurring adoption questions into docs, examples, or a skill |
+| Template sync | `docs/template/template-manifest.yaml`, `scripts/template/sync-template-repo.sh` | Prefer PR-based mother-to-template sync with CI gating |
 
 ## Project Modules
 
@@ -28,8 +30,8 @@ Track what "continue improving all modules" means for the root evolution station
 
 ## Next Iteration Candidates
 
-1. Add `.github/workflows/root-audit.yml` for the root repository.
-2. Add `skills/public-repo-sanitization/SKILL.md`.
-3. Add `skills/workspace-repo-bootstrap/SKILL.md`.
-4. Add issue and PR templates aligned with `specs/review/code_review.md`.
-5. Extract `assets/sirius-icon.svg` from the hero mark.
+1. Add `skills/public-repo-sanitization/SKILL.md`.
+2. Add `skills/workspace-repo-bootstrap/SKILL.md`.
+3. Extract `assets/sirius-icon.svg` from the hero mark.
+4. Add release automation for version bump and changelog generation after v4 stabilizes.
+5. Add diff classification and labels for template sync PRs.

@@ -46,4 +46,14 @@ When writing public docs or skills, reference placeholders such as:
 
 Before committing root docs that mention deployment, scan for real environment values and replace them with placeholders unless the user explicitly asks to publish them.
 
-Use `./scripts/root-repo-structure-audit.sh` as the default local check before committing root repository changes.
+Use `./scripts/root-repo-structure-audit.sh --strict` as the default local check before committing root repository or template-bound changes.
+
+## Community Boundary
+
+Issue templates, PR templates, adoption docs, and examples are public entry points. They should ask for categories, symptoms, reusable context, and validation output, but must not ask users to paste secrets, private hostnames, private IP addresses, credentials, or sensitive remote paths.
+
+When a report needs sensitive evidence, ask for a private maintainer channel and keep the public issue limited to the exposure category.
+
+## Template Boundary
+
+The template repository may include public rules, docs, examples, workflows, and reusable skills. It must exclude `projects/`, root business build aggregation, project-specific deployment checklists, private overlays, and real environment values.
