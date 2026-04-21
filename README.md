@@ -10,6 +10,7 @@
 
 <p align="left">
   <img src="https://img.shields.io/badge/Workspace-Evolution-111827?style=for-the-badge" alt="Workspace Evolution" />
+  <img src="https://img.shields.io/badge/Version-3.0.0-0F766E?style=for-the-badge" alt="Version 3.0.0" />
   <img src="https://img.shields.io/badge/Codex-Agent%20Rules-2563EB?style=for-the-badge" alt="Codex Agent Rules" />
   <img src="https://img.shields.io/badge/Java-21-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21" />
   <img src="https://img.shields.io/badge/Spring%20AI-RAG%20%7C%20Agent-16A34A?style=for-the-badge" alt="Spring AI RAG Agent" />
@@ -20,6 +21,7 @@
   <a href="#进化闭环">进化闭环</a> ·
   <a href="#进化流程图">进化流程图</a> ·
   <a href="#核心资产">核心资产</a> ·
+  <a href="#版本与模板库">版本与模板库</a> ·
   <a href="#项目执行层">项目执行层</a> ·
   <a href="#安全边界">安全边界</a> ·
   <a href="#许可证">许可证</a>
@@ -62,6 +64,10 @@ This repository is not only a GitHub profile README and not only a project colle
 | 资产 / Asset | 说明 / Description |
 | --- | --- |
 | [AGENTS.md](./AGENTS.md) | 根仓库代理规则，定义事实源优先级、根/项目边界、护栏和输出结构 |
+| [VERSION](./VERSION) | 当前工作站控制层版本号 |
+| [CHANGELOG](./CHANGELOG.md) | 按 SemVer 维护的版本历史 |
+| [Release History](./docs/releases/release-history.md) | 版本治理、模板同步和发布边界 |
+| [Template Manifest](./docs/template/template-manifest.yaml) | 模板库同步范围，明确哪些根资产可进入模板 |
 | [Evolution Handbook](./specs/workspace/evolution-handbook.md) | 进化手册全文持久化版本，是本工作站的核心目标说明 |
 | [Workspace Opening Model](./docs/ops/workspace-opening-model.md) | 项目加入、发布形态和目录契约 |
 | [Core Assets Map](./specs/workspace/core-assets-map.md) | 核心文件和目录的中文/英文双语索引 |
@@ -72,9 +78,25 @@ This repository is not only a GitHub profile README and not only a project colle
 | [Cloud Deploy Checklist](./docs/sirius-xz-agent-cloud-deploy-checklist.md) | 云端发布与联调检查清单 |
 | [Reusable Delivery Skill](./skills/workspace-multi-env-delivery/SKILL.md) | 多环境交付、独立仓库发布和部署排障复用流程 |
 | [Root Repo Audit Script](./scripts/root-repo-structure-audit.sh) | 根仓库结构和公开脱敏检查脚本 |
+| [Template Sync Script](./scripts/template/sync-template-repo.sh) | 从当前工作站生成模板库快照，并排除业务项目实现 |
 | [Diagram Capability](./docs/diagrams/README.md) | intent -> layout -> SVG / image prompt 的高质量流程图生成链路 |
 | [Independent Repo Alignment](./specs/workspace/independent-repo-alignment.md) | 独立仓库与根工作站目标对齐标准 |
 | [Module Roadmap](./specs/workspace/module-roadmap.md) | 根模块和子项目模块的持续完善路线 |
+| [GitHub Project Roadmap](./docs/ops/github-project-roadmap.md) | 根工作站迭代看板模型和初始化脚本说明 |
+
+## 版本与模板库
+
+当前控制层版本是 [`3.0.0`](./VERSION)。根工作站按 SemVer 维护：大版本代表工作站运行模型或模板边界变化，小版本代表新增可复用能力，补丁版本用于文档、脚本或检查修正。
+
+模板库用于复制本工作站的可复用控制层，不包含当前仓库的业务实现。大版本稳定后，从当前仓库同步到 `sirius-coding/sirius-evolution-station-template`：
+
+```bash
+./scripts/template/sync-template-repo.sh \
+  --output /tmp/sirius-evolution-station-template \
+  --push
+```
+
+同步范围由 [Template Manifest](./docs/template/template-manifest.yaml) 定义。`projects/`、根 `pom.xml`、项目级部署清单和私有环境覆盖文件不会进入模板库。
 
 ## 项目执行层
 

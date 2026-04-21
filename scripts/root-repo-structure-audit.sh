@@ -27,6 +27,8 @@ require_path() {
 check_required_paths() {
   local paths=(
     "README.md"
+    "VERSION"
+    "CHANGELOG.md"
     "LICENSE"
     "NOTICE"
     "COMMERCIALIZATION.md"
@@ -40,8 +42,11 @@ check_required_paths() {
     "docs/diagrams/evolution-workflow.svg"
     "docs/diagrams/evolution-workflow.image-prompt.md"
     "docs/ops/workspace-opening-model.md"
+    "docs/ops/github-project-roadmap.md"
     "docs/ops/environment-registry.yaml"
     "docs/ops/environment-registry.private.example.yaml"
+    "docs/releases/release-history.md"
+    "docs/template/template-manifest.yaml"
     "projects"
     "scripts"
     "scripts/diagram/build-all.mjs"
@@ -52,8 +57,13 @@ check_required_paths() {
     "scripts/diagram-pipeline.test.sh"
     "scripts/generate-diagrams.mjs"
     "scripts/generate-diagrams.test.sh"
+    "scripts/github/setup-root-project.sh"
     "scripts/root-repo-structure-audit.sh"
     "scripts/root-repo-structure-audit.test.sh"
+    "scripts/template-repo.test.sh"
+    "scripts/template/sync-template-readme.mjs"
+    "scripts/template/sync-template-repo.sh"
+    "scripts/template/template-repo-audit.sh"
     "skills"
     "skills/diagram-pipeline/SKILL.md"
     "skills/workspace-multi-env-delivery/SKILL.md"
@@ -106,6 +116,7 @@ check_yaml() {
   local files=(
     "docs/ops/environment-registry.yaml"
     "docs/ops/environment-registry.private.example.yaml"
+    "docs/template/template-manifest.yaml"
   )
 
   if command -v ruby >/dev/null 2>&1; then
@@ -119,6 +130,41 @@ check_yaml() {
     done
   else
     echo "WARN: ruby not found; skipped YAML parsing"
+  fi
+}
+
+check_release_assets() {
+  local version_file="${ROOT}/VERSION"
+  local changelog="${ROOT}/CHANGELOG.md"
+  local release_history="${ROOT}/docs/releases/release-history.md"
+  local manifest="${ROOT}/docs/template/template-manifest.yaml"
+  local version
+
+  [[ -f "${version_file}" ]] || return
+  version="$(tr -d '[:space:]' < "${version_file}")"
+
+  if [[ "${version}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    pass "VERSION uses SemVer: ${version}"
+  else
+    fail "VERSION is not SemVer: ${version}"
+  fi
+
+  if [[ -f "${changelog}" ]] && grep -q "^## \\[${version}\\]" "${changelog}"; then
+    pass "CHANGELOG contains current version: ${version}"
+  else
+    fail "CHANGELOG is missing current version: ${version}"
+  fi
+
+  if [[ -f "${release_history}" ]] && grep -q "${version}" "${release_history}"; then
+    pass "release history references current version: ${version}"
+  else
+    fail "release history is missing current version: ${version}"
+  fi
+
+  if [[ -f "${manifest}" ]] && grep -q "current_version: \"${version}\"" "${manifest}"; then
+    pass "template manifest current_version matches VERSION"
+  else
+    fail "template manifest current_version does not match VERSION"
   fi
 }
 
@@ -311,6 +357,7 @@ main() {
   check_skill_frontmatter
   check_yaml
   check_toml
+  check_release_assets
   check_diagram_assets
   check_readme_links
   check_project_alignment_sections

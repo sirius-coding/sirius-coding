@@ -13,6 +13,8 @@ The root repository should prioritize shared documentation, reusable skills, env
 
 The complete workstation evolution handbook is persisted at `specs/workspace/evolution-handbook.md`. Treat that file as the durable source for the workspace's long-term operating model.
 
+The root control plane is versioned through `VERSION`, `CHANGELOG.md`, and `docs/releases/release-history.md`. Major reusable root upgrades are synchronized to the template repository using `scripts/template/sync-template-repo.sh`; business implementation under `projects/` must stay out of that template.
+
 ## Fact Source Priority
 
 Use facts in this order:
@@ -31,6 +33,8 @@ Do not replace repository facts with chat-only explanations.
 - `specs/`: workspace rules, review standards, templates, and future control-plane specs.
 - `scripts/`: local automation that is safe to run from the workspace root.
 - `.codex/`: Codex-local configuration only. Shared behavior belongs in this file or under `specs/`.
+
+Template sync is governed by `docs/template/template-manifest.yaml`. It may include shared rules, docs, skills, scripts, specs, and public assets, but must exclude `projects/`, root business build aggregation, private overlays, and project-specific deployment details.
 
 ## Root vs Project Boundary
 

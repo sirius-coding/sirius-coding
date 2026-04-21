@@ -1,0 +1,41 @@
+version: 1
+template_repository: "sirius-coding/sirius-evolution-station-template"
+source_repository: "sirius-coding/sirius-coding"
+current_version: "3.0.0"
+visibility: "public"
+
+include:
+  root_files:
+    - ".gitignore"
+    - "AGENTS.md"
+    - "CHANGELOG.md"
+    - "COMMERCIALIZATION.md"
+    - "LICENSE"
+    - "NOTICE"
+    - "README.md"
+    - "VERSION"
+  directories:
+    - ".codex"
+    - "assets"
+    - "docs"
+    - "scripts"
+    - "skills"
+    - "specs"
+
+exclude:
+  paths:
+    - "projects"
+    - "pom.xml"
+    - "docs/sirius-xz-agent-cloud-deploy-checklist.md"
+    - "docs/superpowers"
+    - "docs/ops/environment-registry.private.yaml"
+    - ".worktrees"
+    - ".git"
+    - "target"
+    - "node_modules"
+
+release_policy:
+  main_repository: "primary iteration workspace"
+  template_repository: "major reusable station baseline"
+  sync_trigger: "major SemVer release"
+  business_project_policy: "exclude projects/ and independent repository implementation updates"

@@ -14,12 +14,15 @@ create_clean_fixture() {
     "${root}/.codex" \
     "${root}/docs/diagrams" \
     "${root}/docs/ops" \
+    "${root}/docs/releases" \
+    "${root}/docs/template" \
     "${root}/assets" \
     "${root}/skills/workspace-multi-env-delivery" \
     "${root}/specs/review" \
     "${root}/specs/workspace" \
     "${root}/projects" \
-    "${root}/scripts"
+    "${root}/scripts/github" \
+    "${root}/scripts/template"
 
   cat > "${root}/README.md" <<'EOF'
 # Fixture
@@ -30,6 +33,18 @@ EOF
 
   cat > "${root}/LICENSE" <<'EOF'
 Apache License fixture
+EOF
+
+  cat > "${root}/VERSION" <<'EOF'
+3.0.0
+EOF
+
+  cat > "${root}/CHANGELOG.md" <<'EOF'
+# Changelog
+
+## [3.0.0] - 2026-04-21
+
+- Fixture release.
 EOF
 
   cat > "${root}/NOTICE" <<'EOF'
@@ -55,6 +70,10 @@ EOF
 
   cat > "${root}/docs/ops/workspace-opening-model.md" <<'EOF'
 # Workspace Opening Model
+EOF
+
+  cat > "${root}/docs/ops/github-project-roadmap.md" <<'EOF'
+# GitHub Project Roadmap
 EOF
 
   cat > "${root}/docs/diagrams/README.md" <<'EOF'
@@ -97,6 +116,19 @@ EOF
 version: 1
 visibility: "private-example"
 environments: []
+EOF
+
+  cat > "${root}/docs/releases/release-history.md" <<'EOF'
+# Release History
+
+Current version: 3.0.0
+EOF
+
+  cat > "${root}/docs/template/template-manifest.yaml" <<'EOF'
+version: 1
+current_version: "3.0.0"
+include_paths: []
+exclude_paths: []
 EOF
 
   cat > "${root}/skills/workspace-multi-env-delivery/SKILL.md" <<'EOF'
@@ -160,12 +192,37 @@ EOF
 echo fixture
 EOF
 
+  cat > "${root}/scripts/template-repo.test.sh" <<'EOF'
+#!/usr/bin/env bash
+echo fixture
+EOF
+
+  cat > "${root}/scripts/template/sync-template-readme.mjs" <<'EOF'
+#!/usr/bin/env node
+process.exit(0);
+EOF
+
+  cat > "${root}/scripts/template/sync-template-repo.sh" <<'EOF'
+#!/usr/bin/env bash
+echo fixture
+EOF
+
+  cat > "${root}/scripts/template/template-repo-audit.sh" <<'EOF'
+#!/usr/bin/env bash
+echo fixture
+EOF
+
   cat > "${root}/scripts/generate-diagrams.mjs" <<'EOF'
 #!/usr/bin/env node
 process.exit(0);
 EOF
 
   cat > "${root}/scripts/generate-diagrams.test.sh" <<'EOF'
+#!/usr/bin/env bash
+echo fixture
+EOF
+
+  cat > "${root}/scripts/github/setup-root-project.sh" <<'EOF'
 #!/usr/bin/env bash
 echo fixture
 EOF
