@@ -2,99 +2,66 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SCRIPT="${SCRIPT_DIR}/generate-diagrams.mjs"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+bash "${ROOT_DIR}/scripts/diagram-pipeline.test.sh" >/dev/null
 
 TMP_ROOT="$(mktemp -d)"
 trap 'rm -rf "${TMP_ROOT}"' EXIT
 
-readme="${TMP_ROOT}/README.md"
-cat > "${readme}" <<'EOF'
-# Fixture README
-
-<!-- diagram:sample:start -->
-```mermaid
-flowchart TB
-  stale["stale"]
-```
-<!-- diagram:sample:end -->
-EOF
-
 fixture="${TMP_ROOT}/sample.diagram.json"
-cat > "${fixture}" <<JSON
+cat > "${fixture}" <<'JSON'
 {
   "id": "sample",
-  "title": "Sample Diagram",
-  "description": "A small conversion fixture.",
-  "direction": "LR",
-  "readmeSync": {
-    "path": "${readme}",
-    "marker": "sample"
-  },
-  "layers": [
-    { "id": "input", "title": "Input" },
-    { "id": "output", "title": "Output" }
-  ],
+  "title": "示例进化流程",
+  "description": "验证兼容入口会调用新 diagram pipeline。",
+  "orientation": "vertical_center",
   "nodes": [
-    { "id": "start", "label": "Start", "kind": "input", "layer": "input" },
-    { "id": "done", "label": "Done", "kind": "output", "layer": "output" }
+    { "id": "A", "title": "输入", "subtitle": "需求", "role": "main", "icon": "chat" },
+    { "id": "B", "title": "分流", "subtitle": "规则, 文档", "role": "hub", "icon": "database" },
+    { "id": "C", "title": "规则", "subtitle": "长期保存", "role": "branch", "icon": "shield" },
+    { "id": "D", "title": "文档", "subtitle": "说明", "role": "branch", "icon": "book" },
+    { "id": "E", "title": "护栏", "subtitle": "发布前检查", "role": "merge", "icon": "shield" },
+    { "id": "F", "title": "输出", "subtitle": "主页展示", "role": "end", "icon": "home" }
   ],
-  "edges": [
-    { "from": "start", "to": "done", "label": "convert" }
+  "main_chain": ["A", "B", "E", "F"],
+  "parallel_groups": [
+    { "id": "assets", "title": "资产", "source": "B", "merge": "E", "columns": ["C", "D"] }
+  ],
+  "merge_nodes": ["E"],
+  "feedback_loops": [
+    { "from": "F", "to": "A", "label": "反馈循环", "route": "outer-left" }
   ]
 }
 JSON
 
-node "${SCRIPT}" "${fixture}" >/dev/null
+node "${ROOT_DIR}/scripts/generate-diagrams.mjs" "${fixture}" >/dev/null
 
-for generated in sample.mmd sample.drawio sample.excalidraw sample.ai-drawio.md; do
+for generated in sample.intent.json sample.layout.plan.json sample.svg sample.image-prompt.md; do
   if [[ ! -s "${TMP_ROOT}/${generated}" ]]; then
     echo "Expected generated file: ${generated}" >&2
     exit 1
   fi
 done
 
-node "${SCRIPT}" --check "${fixture}" >/dev/null
+node "${ROOT_DIR}/scripts/generate-diagrams.mjs" --check "${fixture}" >/dev/null
 
-if ! grep -q 'flowchart LR' "${readme}"; then
-  echo "Expected README diagram block to be synchronized" >&2
-  exit 1
-fi
-
-printf '\n%% stale\n' >> "${TMP_ROOT}/sample.mmd"
+printf '\n<!-- stale -->\n' >> "${TMP_ROOT}/sample.svg"
 
 set +e
-stale_output="$(node "${SCRIPT}" --check "${fixture}" 2>&1)"
+stale_output="$(node "${ROOT_DIR}/scripts/generate-diagrams.mjs" --check "${fixture}" 2>&1)"
 stale_status="$?"
 set -e
 
 if [[ "${stale_status}" -eq 0 ]]; then
-  echo "Expected stale generated output to fail check mode" >&2
+  echo "Expected stale SVG to fail check mode" >&2
   exit 1
 fi
 
-if [[ "${stale_output}" != *"sample.mmd"* ]]; then
-  echo "Expected stale output to mention sample.mmd" >&2
+if [[ "${stale_output}" != *"sample.svg"* ]]; then
+  echo "Expected stale output to mention sample.svg" >&2
   echo "${stale_output}" >&2
   exit 1
 fi
 
-node "${SCRIPT}" "${fixture}" >/dev/null
-perl -0pi -e 's/flowchart LR/flowchart TB/' "${readme}"
-
-set +e
-readme_stale_output="$(node "${SCRIPT}" --check "${fixture}" 2>&1)"
-readme_stale_status="$?"
-set -e
-
-if [[ "${readme_stale_status}" -eq 0 ]]; then
-  echo "Expected stale README diagram block to fail check mode" >&2
-  exit 1
-fi
-
-if [[ "${readme_stale_output}" != *"README.md#sample"* ]]; then
-  echo "Expected stale README output to mention README.md#sample" >&2
-  echo "${readme_stale_output}" >&2
-  exit 1
-fi
-
-echo "generate-diagrams tests passed"
+echo "generate-diagrams compatibility tests passed"

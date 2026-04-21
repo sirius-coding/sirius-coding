@@ -35,22 +35,30 @@ check_required_paths() {
     "docs"
     "docs/diagrams/README.md"
     "docs/diagrams/evolution-workflow.diagram.json"
-    "docs/diagrams/evolution-workflow.mmd"
-    "docs/diagrams/evolution-workflow.drawio"
-    "docs/diagrams/evolution-workflow.excalidraw"
-    "docs/diagrams/evolution-workflow.ai-drawio.md"
+    "docs/diagrams/evolution-workflow.intent.json"
+    "docs/diagrams/evolution-workflow.layout.plan.json"
+    "docs/diagrams/evolution-workflow.svg"
+    "docs/diagrams/evolution-workflow.image-prompt.md"
     "docs/ops/workspace-opening-model.md"
     "docs/ops/environment-registry.yaml"
     "docs/ops/environment-registry.private.example.yaml"
     "projects"
     "scripts"
+    "scripts/diagram/build-all.mjs"
+    "scripts/diagram/build-intent.mjs"
+    "scripts/diagram/build-layout.mjs"
+    "scripts/diagram/render-svg.mjs"
+    "scripts/diagram/render-prompt.mjs"
+    "scripts/diagram-pipeline.test.sh"
     "scripts/generate-diagrams.mjs"
     "scripts/generate-diagrams.test.sh"
     "scripts/root-repo-structure-audit.sh"
     "scripts/root-repo-structure-audit.test.sh"
     "skills"
+    "skills/diagram-pipeline/SKILL.md"
     "skills/workspace-multi-env-delivery/SKILL.md"
     "specs"
+    "specs/diagram-style.md"
     "specs/review/code_review.md"
     "specs/workspace/workstation-operating-rules.md"
     "specs/workspace/public-private-boundary.md"
@@ -139,7 +147,7 @@ PY
 
 check_diagram_assets() {
   local spec="docs/diagrams/evolution-workflow.diagram.json"
-  local generator="scripts/generate-diagrams.mjs"
+  local generator="scripts/diagram/build-all.mjs"
 
   [[ -f "${ROOT}/${spec}" ]] || return
 
@@ -151,7 +159,7 @@ import sys
 with open(sys.argv[1], "r", encoding="utf-8") as fh:
     data = json.load(fh)
 
-required = ("id", "title", "layers", "nodes", "edges")
+required = ("id", "title", "nodes", "main_chain", "parallel_groups", "merge_nodes", "feedback_loops")
 missing = [key for key in required if key not in data]
 if missing:
     raise SystemExit(f"missing diagram keys: {', '.join(missing)}")
@@ -167,12 +175,12 @@ PY
 
   if [[ -f "${ROOT}/${generator}" ]] && command -v node >/dev/null 2>&1; then
     if node "${ROOT}/${generator}" --check "${ROOT}/${spec}" >/dev/null 2>&1; then
-      pass "diagram generated outputs are current"
+      pass "diagram pipeline outputs are current"
     else
-      fail "diagram generated outputs are stale"
+      fail "diagram pipeline outputs are stale"
     fi
   else
-    echo "WARN: node or diagram generator not found; skipped diagram drift check"
+    echo "WARN: node or diagram pipeline not found; skipped diagram drift check"
   fi
 }
 

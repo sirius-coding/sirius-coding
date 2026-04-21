@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1414" viewBox="0 0 1024 1414" role="img" aria-labelledby="title desc">
+  <title id="title">Sirius Coding Evolution Workflow</title>
+  <desc id="desc">开发对话经过实现、验证、复盘和知识分流，沉淀为规则、skill、脚本、文档、图表和项目资产。</desc>
+  <defs>
+    <marker id="arrow-main" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#64748B" />
+    </marker>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.10" />
+    </filter>
+    <style>
+      .canvas { fill: #FFFFFF; }
+      .route { fill: none; stroke: #64748B; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow-main); }
+      .route-branch { stroke-width: 2.2; stroke: #94A3B8; }
+      .route-bus { marker-end: none; stroke: #94A3B8; }
+      .route-feedback { stroke-width: 2.6; stroke: #475569; }
+      .group-box { fill: #FFFFFF; stroke: #CBD5E1; stroke-width: 1.8; stroke-dasharray: 6 6; rx: 10; }
+      .node-card { filter: url(#card-shadow); }
+      .node-title { font: 600 19px "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #0F172A; }
+      .node-subtitle { font: 400 15px "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #475569; }
+      .branch-title { font-size: 16px; }
+      .branch-subtitle { font-size: 13px; }
+      .edge-label { font: 500 13px "PingFang SC", "Microsoft YaHei", Arial, sans-serif; fill: #334155; }
+      .group-title { font: 600 15px "PingFang SC", "Microsoft YaHei", Arial, sans-serif; fill: #64748B; }
+      .icon-line { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.8; }
+    </style>
+  </defs>
+  <rect class="canvas" width="1024" height="1414" />
+  <g data-diagram-stage="parallel-group" data-group-id="durable-assets">
+    <rect class="group-box" x="32" y="770" width="960" height="198" />
+    <text class="group-title" x="50" y="796">长期资产</text>
+  </g>
+  <g data-route-role="main">
+    <path class="route" d="M 512 126 L 512 152" />
+
+  </g>
+  <g data-route-role="main">
+    <path class="route" d="M 512 244 L 512 270" />
+
+  </g>
+  <g data-route-role="main">
+    <path class="route" d="M 512 362 L 512 388" />
+
+  </g>
+  <g data-route-role="main">
+    <path class="route" d="M 512 480 L 512 506" />
+
+  </g>
+  <g data-route-role="main">
+    <path class="route" d="M 512 598 L 512 624" />
+
+  </g>
+  <g data-route-role="split-main">
+    <path class="route" d="M 512 716 L 512 748" />
+
+  </g>
+  <g data-route-role="split-bus">
+    <path class="route route-bus" d="M 131 748 L 893 748" />
+    <text class="edge-label" x="901" y="740">沉淀资产</text>
+  </g>
+  <g data-route-role="branch">
+    <path class="route route-branch" d="M 131 748 L 131 816" />
+
+  </g>
+  <g data-route-role="branch">
+    <path class="route route-branch" d="M 322 748 L 322 816" />
+
+  </g>
+  <g data-route-role="branch">
+    <path class="route route-branch" d="M 512 748 L 512 816" />
+
+  </g>
+  <g data-route-role="branch">
+    <path class="route route-branch" d="M 703 748 L 703 816" />
+
+  </g>
+  <g data-route-role="branch">
+    <path class="route route-branch" d="M 893 748 L 893 816" />
+
+  </g>
+  <g data-route-role="merge-bus">
+    <path class="route route-bus" d="M 131 982 L 893 982" />
+    <text class="edge-label" x="901" y="974">汇聚</text>
+  </g>
+  <g data-route-role="merge-down">
+    <path class="route" d="M 512 982 L 512 1010" />
+
+  </g>
+  <g data-route-role="branch-merge">
+    <path class="route route-branch" d="M 131 934 L 131 982" />
+
+  </g>
+  <g data-route-role="branch-merge">
+    <path class="route route-branch" d="M 322 934 L 322 982" />
+
+  </g>
+  <g data-route-role="branch-merge">
+    <path class="route route-branch" d="M 512 934 L 512 982" />
+
+  </g>
+  <g data-route-role="branch-merge">
+    <path class="route route-branch" d="M 703 934 L 703 982" />
+
+  </g>
+  <g data-route-role="branch-merge">
+    <path class="route route-branch" d="M 893 934 L 893 982" />
+
+  </g>
+  <g data-route-role="main">
+    <path class="route" d="M 512 1102 L 512 1128" />
+
+  </g>
+  <g data-route-role="main">
+    <path class="route" d="M 512 1220 L 512 1246" />
+
+  </g>
+  <g data-route-role="feedback" data-route="outer-left">
+    <path class="route route-feedback" d="M 512 1338 L 512 1380 L 18 1380 L 18 64 L 322 64" />
+    <text class="edge-label" x="32" y="1370">反馈循环</text>
+  </g>
+  <g data-diagram-stage="main-chain" data-node-id="A" class="node-card">
+    <rect x="322" y="34" width="380" height="92" rx="7" fill="#EFF6FF" stroke="#60A5FA" stroke-width="2" />
+    <g transform="translate(348 65) scale(0.86)"><path class="icon-line" stroke="#3B82F6" d="M4 6h28v18H16l-8 7v-7H4z" /></g>
+    <text class="node-title" x="408" y="69">
+      <tspan x="408" dy="0">A. 人与 AI 对话</tspan>
+    </text>
+    <text class="node-subtitle" x="408" y="95">
+      <tspan x="408" dy="0">目标, 约束, 决策</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="main-chain" data-node-id="B" class="node-card">
+    <rect x="322" y="152" width="380" height="92" rx="7" fill="#F0FDF4" stroke="#86EFAC" stroke-width="2" />
+    <g transform="translate(348 183) scale(0.86)"><path class="icon-line" stroke="#22C55E" d="M3 9h11l3 5h22v22H3z" /><path class="icon-line" stroke="#22C55E" d="M3 14h36" /></g>
+    <text class="node-title" x="408" y="187">
+      <tspan x="408" dy="0">B. 读取仓库事实</tspan>
+    </text>
+    <text class="node-subtitle" x="408" y="213">
+      <tspan x="408" dy="0">README, AGENTS</tspan>
+      <tspan x="408" dy="18">docs, projects</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="main-chain" data-node-id="C" class="node-card">
+    <rect x="322" y="270" width="380" height="92" rx="7" fill="#FFFBEB" stroke="#FBBF24" stroke-width="2" />
+    <g transform="translate(348 301) scale(0.86)"><path class="icon-line" stroke="#F59E0B" d="M15 9L7 20l8 11" /><path class="icon-line" stroke="#F59E0B" d="M25 9l8 11-8 11" /></g>
+    <text class="node-title" x="408" y="305">
+      <tspan x="408" dy="0">C. 执行改造</tspan>
+    </text>
+    <text class="node-subtitle" x="408" y="331">
+      <tspan x="408" dy="0">代码, 文档, 脚本, 图表</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="main-chain" data-node-id="D" class="node-card">
+    <rect x="322" y="388" width="380" height="92" rx="7" fill="#F5F3FF" stroke="#A78BFA" stroke-width="2" />
+    <g transform="translate(348 419) scale(0.86)"><path class="icon-line" stroke="#8B5CF6" d="M10 8h20v28H10z" /><path class="icon-line" stroke="#8B5CF6" d="M15 21l5 5 10-12" /></g>
+    <text class="node-title" x="408" y="423">
+      <tspan x="408" dy="0">D. 收集证据</tspan>
+    </text>
+    <text class="node-subtitle" x="408" y="449">
+      <tspan x="408" dy="0">测试, 审计, 构建, 烟测</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="main-chain" data-node-id="E" class="node-card">
+    <rect x="322" y="506" width="380" height="92" rx="7" fill="#FFF7ED" stroke="#FDBA74" stroke-width="2" />
+    <g transform="translate(348 537) scale(0.86)"><path class="icon-line" stroke="#F97316" d="M6 31l9-10 7 6 13-16" /><path class="icon-line" stroke="#F97316" d="M28 11h7v7" /></g>
+    <text class="node-title" x="408" y="541">
+      <tspan x="408" dy="0">E. 进化问题</tspan>
+    </text>
+    <text class="node-subtitle" x="408" y="567">
+      <tspan x="408" dy="0">什么需要长期保存?</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="main-chain" data-node-id="F" class="node-card">
+    <rect x="322" y="624" width="380" height="92" rx="7" fill="#EFF6FF" stroke="#93C5FD" stroke-width="2" />
+    <g transform="translate(348 655) scale(0.86)"><ellipse class="icon-line" stroke="#3B82F6" cx="20" cy="10" rx="13" ry="6" /><path class="icon-line" stroke="#3B82F6" d="M7 10v18c0 3 6 6 13 6s13-3 13-6V10" /><path class="icon-line" stroke="#3B82F6" d="M7 19c0 3 6 6 13 6s13-3 13-6" /></g>
+    <text class="node-title" x="408" y="659">
+      <tspan x="408" dy="0">F. 知识分流</tspan>
+    </text>
+    <text class="node-subtitle" x="408" y="685">
+      <tspan x="408" dy="0">规则, skill, 脚本, 文档</tspan>
+      <tspan x="408" dy="18">项目</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="branch-node" data-node-id="G" class="node-card">
+    <rect x="46" y="816" width="170" height="118" rx="7" fill="#EFF6FF" stroke="#93C5FD" stroke-width="2" />
+    <g transform="translate(64 848) scale(0.86)"><path class="icon-line" stroke="#3B82F6" d="M20 5l13 5v9c0 9-5 15-13 18C12 34 7 28 7 19v-9z" /></g>
+    <text class="node-title branch-title" x="100" y="854">
+      <tspan x="100" dy="0">G. specs +</tspan>
+      <tspan x="100" dy="18">AGENTS.md</tspan>
+    </text>
+    <text class="node-subtitle branch-subtitle" x="100" y="897">
+      <tspan x="100" dy="0">目标, 边界</tspan>
+      <tspan x="100" dy="18">运行规则</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="branch-node" data-node-id="H" class="node-card">
+    <rect x="237" y="816" width="170" height="118" rx="7" fill="#F0FDFA" stroke="#5EEAD4" stroke-width="2" />
+    <g transform="translate(255 848) scale(0.86)"><rect class="icon-line" stroke="#14B8A6" x="5" y="6" width="10" height="10" /><rect class="icon-line" stroke="#14B8A6" x="25" y="6" width="10" height="10" /><rect class="icon-line" stroke="#14B8A6" x="15" y="25" width="10" height="10" /><path class="icon-line" stroke="#14B8A6" d="M15 11h10M30 16v7H20v2" /></g>
+    <text class="node-title branch-title" x="291" y="854">
+      <tspan x="291" dy="0">H. skills</tspan>
+    </text>
+    <text class="node-subtitle branch-subtitle" x="291" y="879">
+      <tspan x="291" dy="0">可复用协作流程</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="branch-node" data-node-id="I" class="node-card">
+    <rect x="427" y="816" width="170" height="118" rx="7" fill="#F0FDF4" stroke="#86EFAC" stroke-width="2" />
+    <g transform="translate(445 848) scale(0.86)"><rect class="icon-line" stroke="#22C55E" x="4" y="8" width="32" height="24" /><path class="icon-line" stroke="#22C55E" d="M10 16l6 5-6 5M20 27h10" /></g>
+    <text class="node-title branch-title" x="481" y="854">
+      <tspan x="481" dy="0">I. scripts</tspan>
+    </text>
+    <text class="node-subtitle branch-subtitle" x="481" y="879">
+      <tspan x="481" dy="0">审计, 生成, 检查</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="branch-node" data-node-id="J" class="node-card">
+    <rect x="618" y="816" width="170" height="118" rx="7" fill="#FFFBEB" stroke="#FCD34D" stroke-width="2" />
+    <g transform="translate(636 848) scale(0.86)"><path class="icon-line" stroke="#F59E0B" d="M8 7h18c4 0 7 3 7 7v22H15c-4 0-7-3-7-7z" /><path class="icon-line" stroke="#F59E0B" d="M15 7v29" /></g>
+    <text class="node-title branch-title" x="672" y="854">
+      <tspan x="672" dy="0">J. docs +</tspan>
+      <tspan x="672" dy="18">diagrams</tspan>
+    </text>
+    <text class="node-subtitle branch-subtitle" x="672" y="897">
+      <tspan x="672" dy="0">运行手册, 环境模型</tspan>
+      <tspan x="672" dy="18">流程图</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="branch-node" data-node-id="K" class="node-card">
+    <rect x="808" y="816" width="170" height="118" rx="7" fill="#FFF7ED" stroke="#FDBA74" stroke-width="2" />
+    <g transform="translate(826 848) scale(0.86)"><path class="icon-line" stroke="#F97316" d="M20 5l15 8v16l-15 8-15-8V13z" /><path class="icon-line" stroke="#F97316" d="M5 13l15 8 15-8M20 21v16" /></g>
+    <text class="node-title branch-title" x="862" y="854">
+      <tspan x="862" dy="0">K. projects</tspan>
+    </text>
+    <text class="node-subtitle branch-subtitle" x="862" y="879">
+      <tspan x="862" dy="0">实现, 测试</tspan>
+      <tspan x="862" dy="18">部署资产</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="main-chain" data-node-id="L" class="node-card">
+    <rect x="322" y="1010" width="380" height="92" rx="7" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="2" />
+    <g transform="translate(348 1041) scale(0.86)"><path class="icon-line" stroke="#EF4444" d="M20 5l13 5v9c0 9-5 15-13 18C12 34 7 28 7 19v-9z" /></g>
+    <text class="node-title" x="408" y="1045">
+      <tspan x="408" dy="0">L. 公开/私有护栏</tspan>
+    </text>
+    <text class="node-subtitle" x="408" y="1071">
+      <tspan x="408" dy="0">发布前脱敏</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="main-chain" data-node-id="M" class="node-card">
+    <rect x="322" y="1128" width="380" height="92" rx="7" fill="#EFF6FF" stroke="#93C5FD" stroke-width="2" />
+    <g transform="translate(348 1159) scale(0.86)"><path class="icon-line" stroke="#3B82F6" d="M5 20L20 7l15 13" /><path class="icon-line" stroke="#3B82F6" d="M10 18v18h20V18" /></g>
+    <text class="node-title" x="408" y="1163">
+      <tspan x="408" dy="0">M. 主页 README</tspan>
+    </text>
+    <text class="node-subtitle" x="408" y="1189">
+      <tspan x="408" dy="0">公开入口与导航</tspan>
+    </text>
+  </g>
+  <g data-diagram-stage="main-chain" data-node-id="N" class="node-card">
+    <rect x="322" y="1246" width="380" height="92" rx="7" fill="#F0FDF4" stroke="#86EFAC" stroke-width="2" />
+    <g transform="translate(348 1277) scale(0.86)"><path class="icon-line" stroke="#22C55E" d="M14 9c-5 1-8 5-7 10-4 3-3 10 2 12 1 5 8 7 12 3 4 4 11 2 12-3 5-2 6-9 2-12 1-5-2-9-7-10-3-5-11-5-14 0z" /><path class="icon-line" stroke="#22C55E" d="M20 11v24M13 19h14M12 27h16" /></g>
+    <text class="node-title" x="408" y="1281">
+      <tspan x="408" dy="0">N. 下一次会话更强</tspan>
+    </text>
+    <text class="node-subtitle" x="408" y="1307">
+      <tspan x="408" dy="0">Vibe coding 进化为资产</tspan>
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,603 @@
+{
+  "schema": "sirius.diagram.layout.v1",
+  "id": "evolution-workflow",
+  "title": "Sirius Coding Evolution Workflow",
+  "description": "开发对话经过实现、验证、复盘和知识分流，沉淀为规则、skill、脚本、文档、图表和项目资产。",
+  "axis": "vertical_center",
+  "canvas": {
+    "width": 1024,
+    "height": 1414,
+    "padding": 32
+  },
+  "main_chain": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "L",
+    "M",
+    "N"
+  ],
+  "centered_nodes": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "L",
+    "M",
+    "N"
+  ],
+  "nodes": [
+    {
+      "id": "A",
+      "title": "人与 AI 对话",
+      "subtitle": "目标, 约束, 决策",
+      "role": "main",
+      "icon": "chat",
+      "x": 322,
+      "y": 34,
+      "width": 380,
+      "height": 92,
+      "lane": "center"
+    },
+    {
+      "id": "B",
+      "title": "读取仓库事实",
+      "subtitle": "README, AGENTS, docs, projects",
+      "role": "main",
+      "icon": "folder",
+      "x": 322,
+      "y": 152,
+      "width": 380,
+      "height": 92,
+      "lane": "center"
+    },
+    {
+      "id": "C",
+      "title": "执行改造",
+      "subtitle": "代码, 文档, 脚本, 图表",
+      "role": "main",
+      "icon": "code",
+      "x": 322,
+      "y": 270,
+      "width": 380,
+      "height": 92,
+      "lane": "center"
+    },
+    {
+      "id": "D",
+      "title": "收集证据",
+      "subtitle": "测试, 审计, 构建, 烟测",
+      "role": "main",
+      "icon": "check",
+      "x": 322,
+      "y": 388,
+      "width": 380,
+      "height": 92,
+      "lane": "center"
+    },
+    {
+      "id": "E",
+      "title": "进化问题",
+      "subtitle": "什么需要长期保存?",
+      "role": "main",
+      "icon": "trend",
+      "x": 322,
+      "y": 506,
+      "width": 380,
+      "height": 92,
+      "lane": "center"
+    },
+    {
+      "id": "F",
+      "title": "知识分流",
+      "subtitle": "规则, skill, 脚本, 文档, 项目",
+      "role": "hub",
+      "icon": "database",
+      "x": 322,
+      "y": 624,
+      "width": 380,
+      "height": 92,
+      "lane": "center"
+    },
+    {
+      "id": "G",
+      "title": "specs + AGENTS.md",
+      "subtitle": "目标, 边界, 运行规则",
+      "role": "branch",
+      "icon": "shield",
+      "x": 46,
+      "y": 816,
+      "width": 170,
+      "height": 118,
+      "lane": "branch"
+    },
+    {
+      "id": "H",
+      "title": "skills",
+      "subtitle": "可复用协作流程",
+      "role": "branch",
+      "icon": "flow",
+      "x": 237,
+      "y": 816,
+      "width": 170,
+      "height": 118,
+      "lane": "branch"
+    },
+    {
+      "id": "I",
+      "title": "scripts",
+      "subtitle": "审计, 生成, 检查",
+      "role": "branch",
+      "icon": "terminal",
+      "x": 427,
+      "y": 816,
+      "width": 170,
+      "height": 118,
+      "lane": "branch"
+    },
+    {
+      "id": "J",
+      "title": "docs + diagrams",
+      "subtitle": "运行手册, 环境模型, 流程图",
+      "role": "branch",
+      "icon": "book",
+      "x": 618,
+      "y": 816,
+      "width": 170,
+      "height": 118,
+      "lane": "branch"
+    },
+    {
+      "id": "K",
+      "title": "projects",
+      "subtitle": "实现, 测试, 部署资产",
+      "role": "branch",
+      "icon": "cube",
+      "x": 808,
+      "y": 816,
+      "width": 170,
+      "height": 118,
+      "lane": "branch"
+    },
+    {
+      "id": "L",
+      "title": "公开/私有护栏",
+      "subtitle": "发布前脱敏",
+      "role": "merge",
+      "icon": "shield",
+      "x": 322,
+      "y": 1010,
+      "width": 380,
+      "height": 92,
+      "lane": "center"
+    },
+    {
+      "id": "M",
+      "title": "主页 README",
+      "subtitle": "公开入口与导航",
+      "role": "end",
+      "icon": "home",
+      "x": 322,
+      "y": 1128,
+      "width": 380,
+      "height": 92,
+      "lane": "center"
+    },
+    {
+      "id": "N",
+      "title": "下一次会话更强",
+      "subtitle": "Vibe coding 进化为资产",
+      "role": "end",
+      "icon": "brain",
+      "x": 322,
+      "y": 1246,
+      "width": 380,
+      "height": 92,
+      "lane": "center"
+    }
+  ],
+  "parallel_groups": [
+    {
+      "id": "durable-assets",
+      "title": "长期资产",
+      "x": 32,
+      "y": 770,
+      "width": 960,
+      "height": 198,
+      "columns": [
+        "G",
+        "H",
+        "I",
+        "J",
+        "K"
+      ],
+      "source": "F",
+      "merge": "L"
+    }
+  ],
+  "merge_nodes": [
+    {
+      "id": "L",
+      "x": 322,
+      "y": 1010
+    }
+  ],
+  "feedback_loops": [
+    {
+      "from": "N",
+      "to": "A",
+      "label": "反馈循环",
+      "route": "outer-left"
+    }
+  ],
+  "routes": [
+    {
+      "from": "A",
+      "to": "B",
+      "role": "main",
+      "points": [
+        {
+          "x": 512,
+          "y": 126
+        },
+        {
+          "x": 512,
+          "y": 152
+        }
+      ]
+    },
+    {
+      "from": "B",
+      "to": "C",
+      "role": "main",
+      "points": [
+        {
+          "x": 512,
+          "y": 244
+        },
+        {
+          "x": 512,
+          "y": 270
+        }
+      ]
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "role": "main",
+      "points": [
+        {
+          "x": 512,
+          "y": 362
+        },
+        {
+          "x": 512,
+          "y": 388
+        }
+      ]
+    },
+    {
+      "from": "D",
+      "to": "E",
+      "role": "main",
+      "points": [
+        {
+          "x": 512,
+          "y": 480
+        },
+        {
+          "x": 512,
+          "y": 506
+        }
+      ]
+    },
+    {
+      "from": "E",
+      "to": "F",
+      "role": "main",
+      "points": [
+        {
+          "x": 512,
+          "y": 598
+        },
+        {
+          "x": 512,
+          "y": 624
+        }
+      ]
+    },
+    {
+      "from": "F",
+      "to": "durable-assets-split",
+      "role": "split-main",
+      "points": [
+        {
+          "x": 512,
+          "y": 716
+        },
+        {
+          "x": 512,
+          "y": 748
+        }
+      ]
+    },
+    {
+      "from": "durable-assets-split-left",
+      "to": "durable-assets-split-right",
+      "role": "split-bus",
+      "label": "沉淀资产",
+      "points": [
+        {
+          "x": 131,
+          "y": 748
+        },
+        {
+          "x": 893,
+          "y": 748
+        }
+      ]
+    },
+    {
+      "from": "F",
+      "to": "G",
+      "role": "branch",
+      "label": "审计",
+      "points": [
+        {
+          "x": 131,
+          "y": 748
+        },
+        {
+          "x": 131,
+          "y": 816
+        }
+      ]
+    },
+    {
+      "from": "F",
+      "to": "H",
+      "role": "branch",
+      "label": "审计",
+      "points": [
+        {
+          "x": 322,
+          "y": 748
+        },
+        {
+          "x": 322,
+          "y": 816
+        }
+      ]
+    },
+    {
+      "from": "F",
+      "to": "I",
+      "role": "branch",
+      "label": "审计",
+      "points": [
+        {
+          "x": 512,
+          "y": 748
+        },
+        {
+          "x": 512,
+          "y": 816
+        }
+      ]
+    },
+    {
+      "from": "F",
+      "to": "J",
+      "role": "branch",
+      "label": "审计",
+      "points": [
+        {
+          "x": 703,
+          "y": 748
+        },
+        {
+          "x": 703,
+          "y": 816
+        }
+      ]
+    },
+    {
+      "from": "F",
+      "to": "K",
+      "role": "branch",
+      "label": "审计",
+      "points": [
+        {
+          "x": 893,
+          "y": 748
+        },
+        {
+          "x": 893,
+          "y": 816
+        }
+      ]
+    },
+    {
+      "from": "durable-assets-merge-left",
+      "to": "durable-assets-merge-right",
+      "role": "merge-bus",
+      "label": "汇聚",
+      "points": [
+        {
+          "x": 131,
+          "y": 982
+        },
+        {
+          "x": 893,
+          "y": 982
+        }
+      ]
+    },
+    {
+      "from": "durable-assets-merge",
+      "to": "L",
+      "role": "merge-down",
+      "points": [
+        {
+          "x": 512,
+          "y": 982
+        },
+        {
+          "x": 512,
+          "y": 1010
+        }
+      ]
+    },
+    {
+      "from": "G",
+      "to": "L",
+      "role": "branch-merge",
+      "label": "审计",
+      "points": [
+        {
+          "x": 131,
+          "y": 934
+        },
+        {
+          "x": 131,
+          "y": 982
+        }
+      ]
+    },
+    {
+      "from": "H",
+      "to": "L",
+      "role": "branch-merge",
+      "label": "审计",
+      "points": [
+        {
+          "x": 322,
+          "y": 934
+        },
+        {
+          "x": 322,
+          "y": 982
+        }
+      ]
+    },
+    {
+      "from": "I",
+      "to": "L",
+      "role": "branch-merge",
+      "label": "审计",
+      "points": [
+        {
+          "x": 512,
+          "y": 934
+        },
+        {
+          "x": 512,
+          "y": 982
+        }
+      ]
+    },
+    {
+      "from": "J",
+      "to": "L",
+      "role": "branch-merge",
+      "label": "审计",
+      "points": [
+        {
+          "x": 703,
+          "y": 934
+        },
+        {
+          "x": 703,
+          "y": 982
+        }
+      ]
+    },
+    {
+      "from": "K",
+      "to": "L",
+      "role": "branch-merge",
+      "label": "审计",
+      "points": [
+        {
+          "x": 893,
+          "y": 934
+        },
+        {
+          "x": 893,
+          "y": 982
+        }
+      ]
+    },
+    {
+      "from": "L",
+      "to": "M",
+      "role": "main",
+      "points": [
+        {
+          "x": 512,
+          "y": 1102
+        },
+        {
+          "x": 512,
+          "y": 1128
+        }
+      ]
+    },
+    {
+      "from": "M",
+      "to": "N",
+      "role": "main",
+      "points": [
+        {
+          "x": 512,
+          "y": 1220
+        },
+        {
+          "x": 512,
+          "y": 1246
+        }
+      ]
+    },
+    {
+      "from": "N",
+      "to": "A",
+      "role": "feedback",
+      "label": "反馈循环",
+      "route": "outer-left",
+      "points": [
+        {
+          "x": 512,
+          "y": 1338
+        },
+        {
+          "x": 512,
+          "y": 1380
+        },
+        {
+          "x": 18,
+          "y": 1380
+        },
+        {
+          "x": 18,
+          "y": 64
+        },
+        {
+          "x": 322,
+          "y": 64
+        }
+      ]
+    }
+  ],
+  "quality_checks": {
+    "main_chain_readable": true,
+    "branches_aligned": true,
+    "arrow_crossings": false,
+    "crowded": false,
+    "feedback_outer_route": true
+  }
+}

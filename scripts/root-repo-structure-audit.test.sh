@@ -65,13 +65,25 @@ EOF
 {
   "id": "evolution-workflow",
   "title": "Evolution Workflow",
-  "layers": [{"id": "a", "title": "A"}],
-  "nodes": [{"id": "n", "label": "Node", "layer": "a"}],
-  "edges": []
+  "nodes": [
+    { "id": "A", "title": "A", "subtitle": "Start", "role": "main" },
+    { "id": "B", "title": "B", "subtitle": "Hub", "role": "hub" },
+    { "id": "C", "title": "C", "subtitle": "Branch", "role": "branch" },
+    { "id": "D", "title": "D", "subtitle": "Merge", "role": "merge" },
+    { "id": "E", "title": "E", "subtitle": "End", "role": "end" }
+  ],
+  "main_chain": ["A", "B", "D", "E"],
+  "parallel_groups": [
+    { "id": "assets", "title": "Assets", "source": "B", "merge": "D", "columns": ["C"] }
+  ],
+  "merge_nodes": ["D"],
+  "feedback_loops": [
+    { "from": "E", "to": "A", "label": "Loop", "route": "outer-left" }
+  ]
 }
 EOF
 
-  for generated in mmd drawio excalidraw ai-drawio.md; do
+  for generated in intent.json layout.plan.json svg image-prompt.md; do
     echo "fixture" > "${root}/docs/diagrams/evolution-workflow.${generated}"
   done
 
@@ -156,6 +168,33 @@ EOF
   cat > "${root}/scripts/generate-diagrams.test.sh" <<'EOF'
 #!/usr/bin/env bash
 echo fixture
+EOF
+
+  mkdir -p "${root}/scripts/diagram"
+  for script in build-all build-intent build-layout render-svg render-prompt; do
+    cat > "${root}/scripts/diagram/${script}.mjs" <<'EOF'
+#!/usr/bin/env node
+process.exit(0);
+EOF
+  done
+
+  cat > "${root}/scripts/diagram-pipeline.test.sh" <<'EOF'
+#!/usr/bin/env bash
+echo fixture
+EOF
+
+  mkdir -p "${root}/skills/diagram-pipeline"
+  cat > "${root}/skills/diagram-pipeline/SKILL.md" <<'EOF'
+---
+name: diagram-pipeline
+description: Fixture diagram skill.
+---
+
+# Diagram Pipeline
+EOF
+
+  cat > "${root}/specs/diagram-style.md" <<'EOF'
+# Diagram Style
 EOF
 }
 
